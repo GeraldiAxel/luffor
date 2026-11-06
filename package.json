@@ -2,7 +2,7 @@
   "name": "luffor-portfolio",
   "version": "1.0.0",
   "private": true,
-  "description": "An editorial portfolio in navy and ivory.",
+  "description": "A maritime-inspired website and application development agency.",
   "scripts": {
     "dev": "node scripts/serve.mjs",
     "start": "node scripts/serve.mjs",

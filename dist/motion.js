@@ -8,7 +8,7 @@
   const hero = document.querySelector('.hero');
   const compass = document.querySelector('.hero-compass');
   const rail = document.querySelector('.journey-index');
-  const chapters = ['work','about','capabilities','contact'].map(id => document.getElementById(id));
+  const chapters = ['capabilities','work','about','contact'].map(id => document.getElementById(id));
   const chapterLinks = [...document.querySelectorAll('.chapter-link')];
   const targets = [...document.querySelectorAll('.reveal')];
   const inView = new Set();
@@ -180,6 +180,7 @@
     clearPointer(); scheduleScroll();
     const dialog = event?.detail?.dialog || document.querySelector('#case-dialog');
     if (!enabled || !dialog.open) return;
+    if (event?.detail?.origin) return;
     const heading = dialog.querySelector('#case-title'); splitWords(heading);
     heading?.querySelectorAll('.word-inner').forEach((word,index) => play(word,[{transform:'translateY(115%) rotate(3deg)'},{transform:'translateY(0) rotate(0)'}],{duration:850,delay:index*45}));
     [dialog.querySelector('.case-heading .eyebrow'),dialog.querySelector('.case-subtitle'),dialog.querySelector('.case-hero')].forEach((node,index) => { if (node) play(node,[{opacity:0,transform:'translateY(22px)'},{opacity:1,transform:'translateY(0)'}],{duration:850,delay:100+index*65}); });
