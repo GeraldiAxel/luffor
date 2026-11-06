@@ -13,12 +13,25 @@
   <link rel="preload" href="assets/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="motion.css?v=1">
   <title>Luffor — A clear point of view</title>
   <script src="site-data.js" defer></script>
-  <script src="app.js" defer></script>
+  <script src="app.js?v=motion-1" defer></script>
+  <script src="motion.js?v=1" defer></script>
+  <script src="ink.js?v=1" defer></script>
 </head>
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <nav class="journey-index" aria-label="Page chapters" inert>
+    <span class="journey-caption mono" aria-hidden="true">THE JOURNEY</span>
+    <div class="journey-track" aria-hidden="true"><span></span></div>
+    <a href="#work" class="chapter-link" aria-label="Chapter 1: Selected work"><span class="chapter-dot"></span><span class="chapter-name">01 / Work</span></a>
+    <a href="#about" class="chapter-link" aria-label="Chapter 2: About"><span class="chapter-dot"></span><span class="chapter-name">02 / About</span></a>
+    <a href="#capabilities" class="chapter-link" aria-label="Chapter 3: Capabilities"><span class="chapter-dot"></span><span class="chapter-name">03 / Focus</span></a>
+    <a href="#contact" class="chapter-link" aria-label="Chapter 4: Contact"><span class="chapter-dot"></span><span class="chapter-name">04 / Contact</span></a>
+    <span class="journey-current mono" aria-hidden="true">01</span>
+  </nav>
   <header class="site-header wrap" id="top">
     <a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a>
     <span class="header-note">Independent by design.</span>
@@ -33,6 +46,11 @@
     <section class="hero wrap" id="hero" aria-labelledby="hero-title">
       <div class="hero-eyebrow"><p class="eyebrow">Independent design & art direction</p><span class="edition mono">PORTFOLIO — VOL. 01</span></div>
       <h1 id="hero-title">A clear point of view.<br><em>A lasting impression.</em></h1>
+      <a class="hero-compass" href="#work" aria-label="Follow the compass to selected work">
+        <svg class="compass-ring" viewBox="0 0 160 160" aria-hidden="true"><defs><path id="compass-type-path" d="M80 80m-62 0a62 62 0 1 1 124 0a62 62 0 1 1-124 0"/></defs><circle cx="80" cy="80" r="48"/><text><textPath href="#compass-type-path" textLength="384">A CLEAR DIRECTION · AN INDEPENDENT SPIRIT · </textPath></text></svg>
+        <svg class="compass-face" viewBox="0 0 100 100" aria-hidden="true"><path class="compass-guides" d="M50 9v10m0 62v10M9 50h10m62 0h10M21 21l5 5m48 48 5 5M21 79l5-5m48-48 5-5"/><g class="compass-needle"><path d="M50 24l8 28-8-4-8 4z"/><path d="M50 76l8-24-8-4-8 4z" class="needle-tail"/></g><circle cx="50" cy="50" r="2"/></svg>
+        <span class="compass-caption mono" aria-hidden="true">FOLLOW YOUR CURIOSITY ↘</span>
+      </a>
       <div class="hero-bottom">
         <div class="hero-art" aria-hidden="true"><img src="assets/ocean-sail-dolphins.webp" width="2172" height="724" alt="" fetchpriority="high"><span class="art-caption mono">A LITTLE CURIOSITY. A CLEAR DIRECTION.</span></div>
         <div class="hero-intro">
@@ -98,8 +116,8 @@
           <div class="footer-column"><p class="mono footer-label">ELSEWHERE</p><a href="#social-instagram" data-social="instagram">Instagram <span aria-hidden="true">↗</span></a><a href="#social-behance" data-social="behance">Behance <span aria-hidden="true">↗</span></a><a href="#social-linkedin" data-social="linkedin">LinkedIn <span aria-hidden="true">↗</span></a></div>
           <div class="footer-column"><p class="mono footer-label">SAY HELLO</p><a href="#contact-details" data-email>[EMAIL ADDRESS] <span aria-hidden="true">↗</span></a><p class="footer-location">[Location]<br>[Availability]</p></div>
         </div>
-        <div class="footer-art" aria-hidden="true"><img src="assets/ocean-sail-dolphins.webp" width="2172" height="724" alt="" loading="lazy"></div>
-        <div class="footer-colophon wrap mono"><span>GUIDED BY CURIOSITY. GROUNDED IN CRAFT.</span><span>DESIGNED WITH INTENTION.</span></div>
+        <div class="footer-art" id="tide" aria-hidden="true"><img src="assets/ocean-sail-dolphins.webp" width="2172" height="724" alt="" loading="lazy"></div>
+        <div class="footer-colophon wrap mono"><span>GUIDED BY CURIOSITY. GROUNDED IN CRAFT.</span><div class="footer-motion-controls"><button class="draw-replay mono" type="button" aria-label="Replay ocean drawing" hidden>REPLAY THE TIDE <span aria-hidden="true">↻</span></button><button class="motion-toggle mono" type="button" aria-label="Turn off animations" aria-pressed="true" hidden><span class="motion-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="motion-toggle-label">MOTION ON</span></button></div><span>DESIGNED WITH INTENTION.</span></div>
       </div>
     </footer>
   </main>

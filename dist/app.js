@@ -74,6 +74,7 @@
     caseDialog.scrollTop = 0;
     document.title = project.title + ' — ' + data.brand.name;
     syncBodyLock();
+    window.dispatchEvent(new CustomEvent('portfolio:casechange', {detail: {dialog: caseDialog}}));
   };
   const closeCase = (restore = true) => {
     if (!caseDialog.open) return;
@@ -90,6 +91,7 @@
     document.querySelector('#contact-dialog-value').textContent = platform ? '[' + platform.toUpperCase() + ' PROFILE]' : '[EMAIL ADDRESS]';
     if (!contactDialog.open) contactDialog.showModal();
     syncBodyLock();
+    window.dispatchEvent(new CustomEvent('portfolio:contactopen', {detail: {dialog: contactDialog}}));
   };
   const closeContact = () => {
     contactDialog.close();
@@ -120,11 +122,6 @@
   window.addEventListener('hashchange', route);
   route();
 
-  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches && 'IntersectionObserver' in window) {
-    document.documentElement.classList.add('js-motion');
-    const observer = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { entry.target.classList.remove('is-waiting'); observer.unobserve(entry.target); } }), {threshold:.06, rootMargin:'0px 0px 20px 0px'});
-    document.querySelectorAll('.reveal').forEach(node => { if (node.getBoundingClientRect().top > window.innerHeight - 30) { node.classList.add('is-waiting'); observer.observe(node); } });
-  }
   if ('IntersectionObserver' in window) {
     const sectionObserver = new IntersectionObserver(entries => entries.forEach(entry => { if (entry.isIntersecting) { document.querySelectorAll('.main-nav a').forEach(link => { if (link.hash === '#' + entry.target.id) link.setAttribute('aria-current','true'); else link.removeAttribute('aria-current'); }); } }), {rootMargin:'-15% 0px -60% 0px',threshold:0});
     ['work','about','contact'].forEach(id => sectionObserver.observe(document.getElementById(id)));
