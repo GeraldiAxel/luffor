@@ -15,7 +15,7 @@ Open `http://localhost:4173`. Node 18 or newer is required. No installation is n
 
 - `dist/site-data.js`: studio name, original logo asset path, location, specialty, availability, genuine email/social links, and all four project titles, descriptions, images, and case-study content. Set these once; project information updates on both the homepage and its study.
 - `dist/index.html`: headline, introduction, biography, capability entries, and other editorial copy. Update the page description, social metadata, and canonical URL if hosting elsewhere.
-- `dist/technology.css`: interface-led hero, diagonal screen stack, browser-window project views, and responsive overrides. `dist/edition.css` holds the agency sections; `dist/styles.css` holds the original palette and base components.
+- `dist/technology.css`: interface-led hero, browser-window project views, and responsive overrides. `dist/ribbon.css` styles the WebGL archive. `dist/edition.css` holds the agency sections; `dist/styles.css` holds the original palette and base components.
 - `dist/assets/`: locally served artwork, project SVGs, fonts, and font licenses.
 
 The supplied brief referred to a sail logo, but the attachment contained only text. The site therefore uses a temporary typographic wordmark. Add the original logo to `dist/assets/`, then set `brand.logo` in `site-data.js`. It will be displayed in its original proportions.
@@ -34,7 +34,9 @@ Website and application mockups, landscape screens, and portrait interface previ
 
 The site has a mobile navigation menu, four shareable hash-based case-study views, next-study links, contact/profile notices, visible focus, native modal focus containment, Escape dismissal, and restored focus after dismissal.
 
-`dist/archive.js` creates the diagonal CSS 3D interface stack, adapted from the supplied Opaque Stack reference. Thin portrait previews repeat along a diagonal row with narrow perspective, eased drag, keyboard navigation, hover pull-out, cursor labels, filters, and an index view. Edges blend sharp and blurred copies of each interface. Clicking a preview hides the other panels and expands the selection into its project view; Escape reverses the flight and brings the row back. Repeated visual panels are decorative; ordinary buttons and links provide accessible navigation.
+`dist/archive.js` creates a curved WebGL ribbon adapted from the supplied Marika Lindfors reference. Three.js 0.160.0 is bundled locally with its MIT license. Custom GLSL bends subdivided interface planes into an S-curve, adds scroll-responsive depth and twist, and draws a receding grid floor with a reflected card pass. Mobile layouts use a vertical ribbon without the floor. The ribbon uses Luffor's four original SVG concept previews, repeated for continuous navigation; it does not use the reference's third-party videos or fictional project credits.
+
+Horizontal drag, horizontal/Shift-wheel input, arrow keys, project buttons, filters, and an index view remain available. Native vertical page scrolling stays with Lenis and adds subtle motion to the visible ribbon. Clicking a card opens its existing project dialog; Escape returns to the ribbon. A static interface preview is the fallback if WebGL is unavailable. Rendering sleeps offscreen, in hidden tabs, and after motion settles. Reduced motion disables inertia, twist, hover effects, and entrances.
 
 `dist/interfaces.js` adds a small, event-driven pointer response to the hero. Entrance animations run once. There is no ambient hero movement and no scroll interception. `dist/voyage.js` is retained as archived source and is no longer loaded. Device and visitor motion preferences disable automated movement and project flight.
 
@@ -44,10 +46,12 @@ The site has a mobile navigation menu, four shareable hash-based case-study view
 
 The footer's **Motion on/off** control saves an explicit visitor preference locally. Device reduced-motion preferences take precedence and disable the effects automatically. Touch layouts retain simple, direct interactions. Pointer-follow animation stops when it settles, scroll work is scheduled only after a relevant event, and offscreen decorative motion pauses. All editorial content remains available with motion disabled or JavaScript unavailable.
 
-Fonts and imagery are local. There are no analytics, forms, or third-party requests at runtime. Lenis is the only bundled library; the visual animations use native CSS and Web Animations.
+Fonts and imagery are local. There are no analytics, forms, or third-party requests at runtime. Lenis and Three.js are bundled locally. The hero and interface transitions use native CSS and Web Animations.
 
 ## Hosting
 
 Lenis 1.3.27 provides smooth wheel and section-link scrolling. It is pinned in `package.json` and bundled locally with its MIT license under `dist/assets/vendor/`. After `npm install`, run `npm run vendor:lenis` to refresh the bundled files. `dist/smooth-scroll.js` respects reduced motion and the visitor motion control, preserves native touch and modal scrolling, and leaves horizontal archive gestures to the archive.
+
+Three.js is pinned to 0.160.0. Run `npm run vendor:three` after installing dependencies to refresh its local browser module and license.
 
 `dist/` is the complete static website. `.openai/hosting.json` retains the private Sites project identity. The local preview server is development-only and is not part of the published website.

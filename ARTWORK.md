@@ -38,3 +38,8 @@ The sea, globe chart, book geometry, paper transition, and irregular ink reveal 
 The hero ship has been removed from the active page at the user’s request. Its replacement is native HTML/CSS interface artwork, with a dashboard, responsive website, and mobile application. No new raster images were generated for this revision.
 
 The archive adapts the supplied Opaque Stack reference’s diagonal row, narrow perspective, hover pull-out, soft edges, and fly-to-project interaction. It uses original website/application SVGs from `scripts/make-digital-concepts.mjs`, rather than the reference’s fictional studio, project names, imagery, or client claims. The footer engraving remains unchanged.
+
+
+## Current curved ribbon archive
+
+At the user’s request, the diagonal stack has been replaced with the curved ribbon from the Marika Lindfors reference. The surface deformation, lighting, hover response, grid floor, and reflected card pass are native custom GLSL rendered with locally bundled Three.js. Mobile uses a vertical ribbon. Cards contain Luffor’s existing four website/application SVG concepts, rather than third-party videos or invented client work. The interface-led hero and engraved footer remain in place.

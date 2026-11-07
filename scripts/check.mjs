@@ -9,7 +9,7 @@ for (const file of files) {
   if (!(await stat(path.join(root,file))).isFile()) continue;
   if (/\.(html|css|js)$/.test(file)) {
     const source = await readFile(path.join(root,file),'utf8');
-    if (file.endsWith('.js')) new vm.Script(source,{filename:file});
+    if (file.endsWith('.js') && !/[/\\]vendor[/\\]/.test(file)) new vm.Script(source,{filename:file});
     for (const match of source.matchAll(/(?:src=["']|href=["']|url\(['"]?)(assets\/[^"'\s)]+)/g)) {
       await stat(path.join(root,match[1])); checked++;
     }
