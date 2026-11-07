@@ -20,7 +20,7 @@ Restored version's production prompt:
 
 > Use case: precise-object-edit. Image 1 is the edit target: the existing wide ivory-on-navy engraved ocean artwork for the Luffor portfolio. Edit this exact composition with only two changes. First, completely replace the lighthouse AND its rocky island at about 65% of the width with a graceful single-masted sailboat afloat on the sea, with one prominent elegant ivory triangular sail, a smaller jib, delicate engraved rigging, and a modest dark hull nestled naturally in the waves. Keep the boat at approximately the lighthouse's original visual scale and position; no lighthouse, tower, island or rock may remain there. Second, add EXACTLY THREE clearly recognizable dolphins leaping above or through the waves, each anatomically correct with a beak-like snout, curved dorsal fin, pectoral fins, and fluked tail. Distribute them at approximately 30%, 46%, and 75% of canvas width, in the middle-depth ocean area, large enough to read as dolphins while remaining elegant secondary details. Render boat and all three dolphins in precisely the same fine antique copperplate engraving, intricate ivory hatching, and restrained maritime illustration style as the original waves. Preserve the original overlapping wave composition, detailed foam and curved hatching, original 3:1 landscape dimensions, flat deep navy #02204F background, warm ivory #F9F5EB ink, and the empty navy upper sky. No extra dolphins, no extra boats, no text, no logos, no stars, no clouds, no new colors, no photographic rendering. Everything else remains visually unchanged.
 
-## Ship-led agency hero
+## Archived ship-led agency hero
 
 Asset: `dist/assets/hero-ship.webp`, 1122 × 1402, with the generated alpha channel preserved.
 
@@ -31,3 +31,10 @@ Generation brief:
 > An isolated antique three-masted sailing ship for the Luffor digital agency hero. A detailed nineteenth-century copperplate engraving, warm ivory sails and fine navy hatching, seen from a graceful three-quarter angle with the bow facing left. Elaborate rigging, billowing sails, a small pennant, a carefully engraved wooden hull, and elegant proportions. Match the fine maritime linework of the footer reference. Transparent background, with no sea, no sky, no land, no frame, no lettering, no skulls, and no watermark. Keep the entire vessel and its rigging inside the image so it can move independently above coded waves.
 
 The sea, globe chart, book geometry, paper transition, and irregular ink reveal are native SVG/CSS/JavaScript. Digital interface concepts are original, editable SVG compositions from `scripts/make-digital-concepts.mjs`; they are not screenshots of real client products.
+
+
+## Current interface-led hero and diagonal archive
+
+The hero ship has been removed from the active page at the user’s request. Its replacement is native HTML/CSS interface artwork, with a dashboard, responsive website, and mobile application. No new raster images were generated for this revision.
+
+The archive adapts the supplied Opaque Stack reference’s diagonal row, narrow perspective, hover pull-out, soft edges, and fly-to-project interaction. It uses original website/application SVGs from `scripts/make-digital-concepts.mjs`, rather than the reference’s fictional studio, project names, imagery, or client claims. The footer engraving remains unchanged.
