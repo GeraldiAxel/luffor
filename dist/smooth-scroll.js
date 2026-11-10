@@ -19,8 +19,7 @@
         smoothWheel:true,
         syncTouch:false,
         respectReducedMotion:true,
-        stopInertiaOnNavigate:true,
-        virtualScroll:({event,deltaX,deltaY})=>!(event.type==='wheel'&&event.target instanceof Element&&event.target.closest('.archive-stage')&&(event.shiftKey||Math.abs(deltaX)>Math.abs(deltaY)*.65))
+        stopInertiaOnNavigate:true
       });
     }
     syncModal();
@@ -34,12 +33,11 @@
     event.preventDefault();
     if(location.hash!==link.hash)history.pushState(null,'',link.hash);
     lenis.scrollTo(target,{onComplete:()=>{
-      const focusTarget=target.id==='main'?target:target.querySelector('h2');
+      const focusTarget=target.id==='main'?target:target.querySelector('h1,h2');
       if(focusTarget){focusTarget.setAttribute('tabindex','-1');focusTarget.focus({preventScroll:true});}
     }});
   });
   addEventListener('portfolio:motionchange',sync);
-  addEventListener('portfolio:casechange',syncModal);
   addEventListener('portfolio:contactopen',syncModal);
   document.querySelectorAll('dialog').forEach(dialog=>dialog.addEventListener('close',syncModal));
   reduce.addEventListener('change',sync);

@@ -15,46 +15,31 @@
   <link rel="stylesheet" href="styles.css">
   <link rel="stylesheet" href="motion.css?v=1">
   <link rel="stylesheet" href="edition.css?v=1">
-  <link rel="stylesheet" href="technology.css?v=1">
-  <link rel="stylesheet" href="ribbon.css?v=1">
+  <link rel="stylesheet" href="technology.css?v=minimal-1">
   <link rel="stylesheet" href="assets/vendor/lenis.css">
   <title>Luffor — Website & Application Development Agency</title>
   <script src="site-data.js" defer></script>
-  <script src="archive.js?v=3" defer></script>
-  <script src="app.js?v=tech-1" defer></script>
-  <script src="motion.js?v=edition-1" defer></script>
+  <script src="app.js?v=minimal-1" defer></script>
+  <script src="motion.js?v=minimal-1" defer></script>
   <script src="ink.js?v=1" defer></script>
   <script src="interfaces.js?v=1" defer></script>
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="smooth-scroll.js?v=1" defer></script>
 </head>
-<body>
+<body class="minimal-site">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
-  <nav class="journey-index" aria-label="Page chapters" inert>
-    <span class="journey-caption mono" aria-hidden="true">THE JOURNEY</span>
-    <div class="journey-track" aria-hidden="true"><span></span></div>
-    <a href="#capabilities" class="chapter-link" aria-label="Chapter 1: Solutions"><span class="chapter-dot"></span><span class="chapter-name">01 / Solutions</span></a>
-    <a href="#work" class="chapter-link" aria-label="Chapter 2: Digital concepts"><span class="chapter-dot"></span><span class="chapter-name">02 / Work</span></a>
-    <a href="#about" class="chapter-link" aria-label="Chapter 3: Agency"><span class="chapter-dot"></span><span class="chapter-name">03 / Agency</span></a>
-    <a href="#contact" class="chapter-link" aria-label="Chapter 4: Contact"><span class="chapter-dot"></span><span class="chapter-name">04 / Contact</span></a>
-    <span class="journey-current mono" aria-hidden="true">01</span>
-  </nav>
   <header class="site-header wrap" id="top">
     <a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a>
     <span class="header-note">Websites. Applications. Digital solutions.</span>
-    <button class="menu-toggle" aria-controls="main-nav" aria-expanded="false"><span class="menu-label">Menu</span><span class="menu-icon" aria-hidden="true"></span></button>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a class="nav-link" href="#capabilities">Solutions <span class="nav-index">01</span></a>
-      <a class="nav-link" href="#work">Work <span class="nav-index">02</span></a>
-      <a class="nav-link" href="#about">Agency <span class="nav-index">03</span></a>
       <a class="nav-link" href="#contact">Let’s talk <span class="small-arrow" aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="main">
     <section class="hero edition-hero wrap" id="hero" aria-labelledby="hero-title">
       <div class="hero-eyebrow"><p class="eyebrow">Your digital design &amp; development agency</p><span class="edition mono">LUFFOR / DIGITAL SOLUTIONS</span></div>
-      <div class="hero-copy"><h1 id="hero-title">Websites &amp; apps.<br><em>Built to solve.</em></h1><p class="agency-intro">We design and develop websites and custom applications that move your business forward. A stronger online presence. A simpler workflow. A digital product your customers love using.</p><div class="hero-actions"><a class="primary-cta" href="#capabilities"><span class="cta-label">Explore our solutions</span><span class="cta-icon" aria-hidden="true">↘</span></a><a class="quiet-link" href="#contact">Discuss a project <span aria-hidden="true">↗</span></a></div><p class="hero-deliverables mono">WEBSITE DEVELOPMENT <span>·</span> CUSTOM APPLICATIONS <span>·</span> UI / UX</p></div>
+      <div class="hero-copy"><h1 id="hero-title">Websites &amp; apps.<br><em>Built to solve.</em></h1><p class="agency-intro">We design and develop websites and custom applications that move your business forward. A stronger online presence. A simpler workflow. A digital product your customers love using.</p><div class="hero-actions"><a class="primary-cta" href="mailto:lufforsolution@gmail.com"><span class="cta-label">Start a project</span><span class="cta-icon" aria-hidden="true">↗</span></a><a class="quiet-link" href="#contact">Discuss a project <span aria-hidden="true">↗</span></a></div><p class="hero-deliverables mono">WEBSITE DEVELOPMENT <span>·</span> CUSTOM APPLICATIONS <span>·</span> UI / UX</p></div>
       <div class="product-visual" aria-hidden="true">
         <div class="product-grid"></div>
         <span class="product-coordinate mono">DESIGNED FOR PEOPLE. BUILT FOR BUSINESS.</span>
@@ -68,66 +53,16 @@
       </div>
       <div class="hero-foot mono"><span>FROM THE FIRST IDEA TO THE FINAL BUILD.</span><span>STRATEGY → DESIGN → DEVELOPMENT</span></div>
     </section>
-    <section class="capabilities-section solutions-section" id="capabilities" aria-labelledby="capabilities-title">
-      <div class="capabilities-intro reveal"><p class="eyebrow"><span class="section-number">01 /</span> What we build for your business</p><h2 id="capabilities-title">Your challenge.<br><em>Our digital solutions.</em></h2><p>Tell us what needs to work better.<br class="desktop-break"> We’ll help you design and build the way forward.</p></div>
-      <ol class="capabilities-list">
-        <li class="reveal"><details open><summary><span class="solution-number">01</span><h3>Website design &amp; development.</h3><span class="solution-toggle" aria-hidden="true">↗</span></summary><div class="solution-body"><p>Make your business easier to find, understand, and choose. We create responsive websites with clear content, considered design, and a purposeful path from first visit to enquiry.</p><span class="mono">COMPANY WEBSITES / LANDING PAGES / E-COMMERCE / CONTENT MANAGEMENT</span></div></details></li>
-        <li class="reveal"><details><summary><span class="solution-number">02</span><h3>Custom applications.</h3><span class="solution-toggle" aria-hidden="true">↗</span></summary><div class="solution-body"><p>Replace disconnected tools and repetitive tasks with software shaped around your business. From customer portals to internal platforms, we design and develop applications that make complex work feel simpler.</p><span class="mono">WEB APPLICATIONS / CUSTOMER PORTALS / INTERNAL TOOLS / WORKFLOW AUTOMATION</span></div></details></li>
-        <li class="reveal"><details><summary><span class="solution-number">03</span><h3>UI / UX &amp; product design.</h3><span class="solution-toggle" aria-hidden="true">↗</span></summary><div class="solution-body"><p>Help people get where they need to go. We turn product requirements into intuitive journeys, clear interfaces, and prototypes you can explore before development begins.</p><span class="mono">USER JOURNEYS / INTERFACE DESIGN / PROTOTYPING / DESIGN SYSTEMS</span></div></details></li>
-        <li class="reveal"><details><summary><span class="solution-number">04</span><h3>Strategy &amp; integration.</h3><span class="solution-toggle" aria-hidden="true">↗</span></summary><div class="solution-body"><p>Give your next digital investment a clear plan. We help define what to build, how it should work, and how it connects with the tools and processes your business already uses.</p><span class="mono">DIGITAL PLANNING / TECHNICAL DISCOVERY / SYSTEM INTEGRATION</span></div></details></li>
-      </ol>
-    </section>
-    <section class="work-section archive-section" id="work" aria-labelledby="work-title">
-      <div class="section-heading reveal"><div><p class="eyebrow"><span class="section-number">02 /</span> Digital possibilities</p><h2 id="work-title">See what we<br><em>could build for you.</em><span class="heading-count">(04)</span></h2></div><p class="section-aside">Four website and application concepts.<br>Different needs. Purposeful solutions.</p></div>
-      <div class="archive-controls wrap" hidden><nav class="archive-filters" aria-label="Filter selected work"><button type="button" data-filter="all" aria-pressed="true">All concepts <sup>04</sup></button><button type="button" data-filter="websites" aria-pressed="false">Websites <sup>02</sup></button><button type="button" data-filter="applications" aria-pressed="false">Applications <sup>02</sup></button></nav><div class="archive-modes" role="group" aria-label="Archive view"><button type="button" data-archive-view="screens" aria-pressed="true">3D view</button><button type="button" data-archive-view="index" aria-pressed="false">Index</button></div></div>
-      <div class="archive-experience" hidden>
-        <div class="archive-stage" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Project ribbon. Drag horizontally or use arrow keys to explore. Press Enter to open the selected project."><div class="archive-world" aria-hidden="true"></div><span class="shelf-baseline" aria-hidden="true"></span><span class="shelf-coordinate mono" aria-hidden="true">WEBSITES &amp; APPLICATIONS / 01—04</span><span class="shelf-hint mono" aria-hidden="true">DRAG TO EXPLORE <span>↔</span></span></div>
-        <div class="archive-caption wrap"><button class="archive-arrow" type="button" data-step="-1" aria-label="Previous project">←</button><div class="archive-caption-copy" aria-live="polite" aria-atomic="true"><p class="archive-kicker mono">01 / COMPANY WEBSITE</p><h3 class="archive-name">Forme</h3><p class="archive-description">A clearer online presence. A simpler path to enquiry.</p><a class="archive-open text-link" href="#project-forme">Open the study <span aria-hidden="true">↗</span></a></div><button class="archive-arrow" type="button" data-step="1" aria-label="Next project">→</button></div>
-        <nav class="archive-project-tabs" aria-label="Select a project"></nav>
-      </div>
-      <div class="projects">
-        <article class="project project-featured reveal">
-          <a class="project-image" href="#project-forme" aria-label="View Forme concept study"><img src="assets/project-forme.svg" width="1600" height="1000" alt="Forme website concept showing a service-led homepage and enquiry button" loading="lazy"><span class="project-view">View study <span aria-hidden="true">↗</span></span><span class="asset-index mono">STUDY NO. 01</span></a>
-          <div class="project-caption"><div class="project-title"><span class="project-number mono">01</span><div><h3><a href="#project-forme">Forme</a></h3><p>A clearer online presence. A simpler path to enquiry.</p></div></div><div class="project-meta mono"><span>COMPANY WEBSITE</span><span>INDEPENDENT CONCEPT</span></div></div>
-        </article>
-        <div class="project-pair">
-          <article class="project project-editorial reveal">
-            <a class="project-image" href="#project-quiet-edit" aria-label="View The Quiet Edit concept study"><img src="assets/project-quiet-edit.svg" width="1600" height="1000" alt="The Quiet Edit publishing website concept with an article grid, topics, and a featured story" loading="lazy"><span class="project-view">View study <span aria-hidden="true">↗</span></span><span class="asset-index mono">STUDY NO. 02</span></a>
-            <div class="project-caption"><div class="project-title"><span class="project-number mono">02</span><div><h3><a href="#project-quiet-edit">The Quiet Edit</a></h3><p>A publishing platform that gives every story its place.</p></div></div><div class="project-meta mono"><span>CONTENT WEBSITE</span><span>INDEPENDENT CONCEPT</span></div></div>
-          </article>
-          <article class="project project-digital reveal">
-            <a class="project-image" href="#project-common-ground" aria-label="View Common Ground concept study"><img src="assets/project-common-ground.svg" width="1600" height="1000" alt="Common Ground application concept with shared tasks, project progress, and team activity" loading="lazy"><span class="project-view">View study <span aria-hidden="true">↗</span></span><span class="asset-index mono">STUDY NO. 03</span></a>
-            <div class="project-caption"><div class="project-title"><span class="project-number mono">03</span><div><h3><a href="#project-common-ground">Common Ground</a></h3><p>Bring people, projects, and everyday work into one place.</p></div></div><div class="project-meta mono"><span>CUSTOM WEB APPLICATION</span><span>INDEPENDENT CONCEPT</span></div></div>
-          </article>
-        </div>
-        <article class="project project-closing reveal">
-          <a class="project-image" href="#project-perspective" aria-label="View Perspective concept study"><img src="assets/project-perspective.svg" width="1600" height="1000" alt="Perspective dashboard concept with a reporting chart, activity overview, and organized data table" loading="lazy"><span class="project-view">View study <span aria-hidden="true">↗</span></span><span class="asset-index mono">STUDY NO. 04</span></a>
-          <div class="project-caption"><div class="project-title"><span class="project-number mono">04</span><div><h3><a href="#project-perspective">Perspective</a></h3><p>Turn scattered information into a clearer next decision.</p></div></div><div class="project-meta mono"><span>DASHBOARD &amp; PRODUCT UX</span><span>INDEPENDENT CONCEPT</span></div></div>
-        </article>
-      </div>
-      <p class="work-note mono">INDEPENDENT CONCEPTS. ILLUSTRATIVE EXAMPLES, NOT COMMISSIONED CLIENT WORK.</p>
-    </section>
-    <section class="about-section agency-section" id="about" aria-labelledby="about-title">
-      <div class="wrap">
-        <p class="eyebrow reveal"><span class="section-number">03 /</span> Your digital partner</p>
-        <div class="about-grid">
-          <h2 class="reveal" id="about-title">From your idea.<br>To a working<br><em>digital solution.</em></h2>
-          <div class="about-copy reveal"><span class="editorial-asterisk" aria-hidden="true">✳</span><p class="about-lead">A design and development partner for your next step.</p><p class="bio-placeholder">We’re Luffor. We help businesses create websites, applications, and digital experiences that connect what people need with what technology can do.</p><p class="bio-placeholder">We start with your challenge, define a clear direction, and bring it to life through thoughtful design and development. You bring the ambition. We bring the thinking and the making.</p><a class="text-link" href="#contact">Tell us what you need to build <span aria-hidden="true">↗</span></a></div>
-        </div>
-        <div class="agency-process reveal"><div><span class="mono">01 / DISCOVER</span><p>Understand your business.</p></div><div><span class="mono">02 / DESIGN</span><p>Shape the right experience.</p></div><div><span class="mono">03 / DEVELOP</span><p>Build it. Refine it. Launch it.</p></div></div>
-        <dl class="about-details reveal"><div><dt class="mono">BUILT AROUND</dt><dd>Your business</dd></div><div><dt class="mono">A FOCUS ON</dt><dd>Websites &amp; applications</dd></div><div><dt class="mono">FROM IDEA TO</dt><dd><span class="availability-dot" aria-hidden="true" hidden></span>Design. Development. Launch.</dd></div></dl>
-      </div>
-    </section>
     <footer class="contact-section" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-top">
-        <div class="contact-eyebrow reveal"><p class="eyebrow"><span class="section-number">04 /</span> The next chapter</p><a class="back-top mono" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div>
+        <div class="contact-eyebrow reveal"><p class="eyebrow">The next chapter</p><a class="back-top mono" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div>
         <div class="contact-invitation reveal"><h2 id="contact-title">Let’s build your<br><em>next digital solution.</em></h2><a class="contact-arrow" href="mailto:lufforsolution@gmail.com" aria-label="Email Luffor about a project"><span aria-hidden="true">↗</span></a></div>
         <div class="contact-line reveal"><p>Tell us what you’re trying to solve.<br>We’ll start with the right questions.</p><a class="email-link" href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a></div>
       </div>
       <div class="footer-bottom">
         <div class="wrap footer-grid">
           <div class="footer-brand"><a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a><p>A clear point of view.<br>A lasting impression.</p><p class="copyright mono">© <span data-current-year>2026</span> <span data-brand-plain>Luffor</span></p></div>
-          <div class="footer-column"><p class="mono footer-label">EXPLORE</p><a href="#work">Selected work</a><a href="#about">Our agency</a><a href="#capabilities">Digital solutions</a></div>
+          <div class="footer-column"><p class="mono footer-label">EXPLORE</p><a href="#hero">Back to the hero</a><a href="#contact">Let’s talk</a></div>
           <div class="footer-column"><p class="mono footer-label">ELSEWHERE</p><a href="#social-instagram" data-social="instagram">Instagram <span aria-hidden="true">↗</span></a><a href="#social-behance" data-social="behance">Behance <span aria-hidden="true">↗</span></a><a href="#social-linkedin" data-social="linkedin">LinkedIn <span aria-hidden="true">↗</span></a></div>
           <div class="footer-column"><p class="mono footer-label">SAY HELLO</p><a href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a><p class="footer-location">Websites &amp; applications<br>Strategy. Design. Development.</p></div>
         </div>
@@ -136,7 +71,6 @@
       </div>
     </footer>
   </main>
-  <dialog data-lenis-prevent class="case-dialog" id="case-dialog" aria-labelledby="case-title"><div class="case-shell"><div class="case-topbar"><a class="wordmark" href="#top" data-close-case aria-label="Close study and return home">Luffor.</a><button class="close-button" data-close-case aria-label="Close case study">Close <span aria-hidden="true">×</span></button></div><div id="case-content"></div></div></dialog>
   <dialog data-lenis-prevent class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title"><button class="close-button" data-close-contact aria-label="Close contact details">Close <span aria-hidden="true">×</span></button><p class="eyebrow">The beginning of something good</p><h2 id="contact-dialog-title">Let’s talk.</h2><p id="contact-dialog-copy">This is a replaceable contact detail. Add your email address to make this space your own.</p><p class="contact-placeholder" id="contact-dialog-value">[EMAIL ADDRESS]</p><button class="text-link" data-close-contact>Back to Luffor <span aria-hidden="true">↗</span></button></dialog>
   <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
 </body>

@@ -17,9 +17,10 @@ for (const file of files) {
 }
 const window = {};
 vm.runInNewContext(await readFile(path.join(root,'site-data.js'),'utf8'),{window});
-if (window.PORTFOLIO.projects.length !== 4) throw new Error('Four projects are required.');
-for (const project of window.PORTFOLIO.projects) {
-  for (const field of ['slug','title','category','year','image','overview','role','challenge','approach','outcome','support']) if (!project[field]) throw new Error(`Missing ${field}`);
-  await stat(path.join(root,project.image)); await stat(path.join(root,project.support));
+if (!window.PORTFOLIO.brand.name || !window.PORTFOLIO.contact.email) throw new Error('Brand and enquiry details are required.');
+const html = await readFile(path.join(root,'index.html'),'utf8');
+const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
+for (const match of html.matchAll(/href="#([^"]+)"/g)) {
+  if (!ids.has(match[1]) && !match[1].startsWith('social-')) throw new Error(`Missing link target: ${match[1]}`);
 }
-console.log(`Ready: ${files.length} files, ${checked} local asset references, four complete case-study structures, valid JavaScript.`);
+console.log(`Ready: ${files.length} files, ${checked} local asset references, valid navigation and JavaScript.`);

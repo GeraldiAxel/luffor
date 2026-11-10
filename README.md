@@ -1,5 +1,7 @@
 # Luffor
 
+The current page contains only the interface-led hero and animated contact footer. Solutions, the project ribbon, agency content, case studies, and their navigation have been removed. Lenis smooth scrolling and the footer drawing remain active. Earlier implementation details below describe archived source and assets that are no longer loaded.
+
 A buildless digital agency website in deep navy and warm ivory. Luffor's offer is website design and development, custom applications, UI / UX, and digital strategy.
 
 ## Run locally
