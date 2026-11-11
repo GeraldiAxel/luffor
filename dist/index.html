@@ -17,43 +17,69 @@
   <link rel="stylesheet" href="edition.css?v=1">
   <link rel="stylesheet" href="technology.css?v=minimal-1">
   <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="cockpit.css?v=studio-2">
+  <link rel="preload" as="image" href="assets/cockpit-studio/poster.webp">
   <title>Luffor — Website & Application Development Agency</title>
   <script src="site-data.js" defer></script>
   <script src="app.js?v=minimal-1" defer></script>
   <script src="motion.js?v=minimal-1" defer></script>
   <script src="ink.js?v=1" defer></script>
-  <script src="interfaces.js?v=1" defer></script>
+  <script src="cockpit-studio.js?v=2" defer></script>
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="smooth-scroll.js?v=1" defer></script>
 </head>
-<body class="minimal-site">
+<body class="minimal-site cockpit-site">
   <a class="skip-link" href="#main">Skip to content</a>
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="site-header wrap" id="top">
     <a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a>
-    <span class="header-note">Websites. Applications. Digital solutions.</span>
+    <span class="header-note">Digital design &amp; development</span>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a class="nav-link" href="#contact">Let’s talk <span class="small-arrow" aria-hidden="true">↗</span></a>
+      <button type="button" data-cockpit-go="work">Work</button><button type="button" data-cockpit-go="services">Services</button><button type="button" data-cockpit-go="about">About</button><a class="nav-link" href="#contact">Let’s talk <span class="small-arrow" aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="main">
-    <section class="hero edition-hero wrap" id="hero" aria-labelledby="hero-title">
-      <div class="hero-eyebrow"><p class="eyebrow">Your digital design &amp; development agency</p><span class="edition mono">LUFFOR / DIGITAL SOLUTIONS</span></div>
-      <div class="hero-copy"><h1 id="hero-title">Websites &amp; apps.<br><em>Built to solve.</em></h1><p class="agency-intro">We design and develop websites and custom applications that move your business forward. A stronger online presence. A simpler workflow. A digital product your customers love using.</p><div class="hero-actions"><a class="primary-cta" href="mailto:lufforsolution@gmail.com"><span class="cta-label">Start a project</span><span class="cta-icon" aria-hidden="true">↗</span></a><a class="quiet-link" href="#contact">Discuss a project <span aria-hidden="true">↗</span></a></div><p class="hero-deliverables mono">WEBSITE DEVELOPMENT <span>·</span> CUSTOM APPLICATIONS <span>·</span> UI / UX</p></div>
-      <div class="product-visual" aria-hidden="true">
-        <div class="product-grid"></div>
-        <span class="product-coordinate mono">DESIGNED FOR PEOPLE. BUILT FOR BUSINESS.</span>
-        <div class="product-window">
-          <div class="product-chrome"><span class="window-dots"><i></i><i></i><i></i></span><span>workspace / overview</span><span>↗</span></div>
-          <div class="product-app"><div class="product-sidebar"><span class="app-symbol">L.</span><span class="app-nav-active">◈ &nbsp; Overview</span><span>▤ &nbsp; Projects</span><span>✓ &nbsp; Tasks</span><span>↗ &nbsp; Reports</span><span class="app-settings">⊕ &nbsp; Settings</span></div><div class="product-content"><p class="product-breadcrumb">WORKSPACE <span>INTERFACE CONCEPT</span></p><h3>One clear view.</h3><p class="product-helper">Your people, projects, and progress.</p><div class="product-stats"><div><span>PROJECTS</span><strong>Organised.</strong></div><div><span>WORKFLOWS</span><strong>Connected.</strong></div><div><span>NEXT STEPS</span><strong>Clear.</strong></div></div><div class="product-chart"><span>Activity overview</span><small>ILLUSTRATIVE DATA</small><svg viewBox="0 0 360 100"><defs><linearGradient id="activity-fill" x1="0" x2="0" y1="0" y2="1"><stop stop-color="#93b5e7" stop-opacity=".24"/><stop offset="1" stop-color="#93b5e7" stop-opacity="0"/></linearGradient></defs><path class="chart-grid" d="M0 20h360M0 50h360M0 80h360"/><path d="M0 87C20 87 22 58 45 64S75 45 100 53S133 23 160 32S193 45 220 23S253 32 280 18S328 20 360 6V100H0Z" fill="url(#activity-fill)"/><path class="chart-line" d="M0 87C20 87 22 58 45 64S75 45 100 53S133 23 160 32S193 45 220 23S253 32 280 18S328 20 360 6"/></svg></div><div class="product-task"><i></i><span>Customer portal</span><b>In development</b><span>↗</span></div></div></div>
+    <section class="hero cockpit-hero" id="hero" aria-labelledby="hero-title">
+      <div class="wheelhouse" id="wheelhouse" data-renderer="loading" aria-label="Explore Luffor’s cockpit studio">
+        <img class="cockpit-poster" src="assets/cockpit-studio/poster.webp" width="1920" height="1080" alt="A ship’s wheelhouse at night, fitted out as a developer studio: three developers at the helm, chart table and window seat, with a lighthouse outside the starboard window." fetchpriority="high">
+        <canvas class="cockpit-canvas" aria-hidden="true"></canvas>
+        <div class="scene-topline"><button class="scene-pause" type="button" aria-pressed="false" aria-label="Pause cockpit animation" hidden>Ⅱ &nbsp; Pause</button></div>
+        <div class="scene-loading" role="status">COMING ABOARD</div>
+        <div class="scene-hotspots" aria-label="Objects to explore">
+          <button class="scene-hotspot" data-cockpit-go="work" aria-label="Explore work at the work locker" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">Explore our work</span></button>
+          <button class="scene-hotspot" data-cockpit-go="services" aria-label="Explore services at the chart table" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">Our services</span></button>
+          <button class="scene-hotspot" data-cockpit-go="about" aria-label="Meet the crew at the lookout" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">About Luffor</span></button>
+          <button class="scene-hotspot" data-cockpit-go="contact" aria-label="Contact Luffor at the radio station" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">Send a signal</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="helm" aria-label="Walk to the helm desk" hidden><span class="hotspot-ring" aria-hidden="true">↗</span><span class="hotspot-name">The helm</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="reverse" aria-label="Turn around and look aft from the bow" hidden><span class="hotspot-ring" aria-hidden="true">↶</span><span class="hotspot-name">Look aft</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="home" aria-label="Return to the opening view of the bridge" hidden><span class="hotspot-ring" aria-hidden="true">↶</span><span class="hotspot-name">Back to the bridge</span></button>
         </div>
-        <div class="product-site"><div class="product-chrome"><span class="window-dots"><i></i><i></i><i></i></span><span>website / responsive</span><span>↗</span></div><div class="mini-site-nav"><strong>forme.</strong><span>Services &nbsp; Work &nbsp; About</span></div><div class="mini-site-copy"><p>Built with care.<br><em>Made for everyday.</em></p><span>Thoughtful ideas. A clear point of view.</span><div class="mini-site-cta">Explore our services &nbsp; ↗</div></div><div class="mini-site-art"><i></i><i></i><i></i><i></i><i></i></div><div class="mini-site-bottom">A STRONGER ONLINE PRESENCE. <span>↗</span></div></div>
-        <div class="product-phone"><div class="phone-speaker"></div><div class="phone-top">L. <span>☰</span></div><p>Your work.<br><em>Everywhere.</em></p><div class="phone-task"><i></i><span>Website design<small>Ready for review</small></span><b>↗</b></div><div class="phone-task"><i></i><span>Customer portal<small>In development</small></span><b>↗</b></div><div class="phone-progress"><span>Your next step</span><strong>Move it forward.</strong><div><i></i></div></div><span class="phone-home"></span></div>
-        <div class="product-label mono"><span class="signal-dot"></span> WEB &amp; APPLICATION DEVELOPMENT</div>
+        <aside class="scene-panel" aria-labelledby="scene-panel-title" hidden><button class="scene-panel-close" type="button" aria-label="Close panel and return to the bridge">×</button><span class="panel-index"></span><h2 id="scene-panel-title"></h2><div class="panel-content"></div></aside>
+        <p class="scene-status">Drag to look around. Click to explore.</p>
+        <div class="scene-look" aria-label="Look around the cockpit"><button type="button" data-look="-1" aria-label="Look left">←</button><span>LOOK AROUND</span><button type="button" data-look="1" aria-label="Look right">→</button></div>
+        
       </div>
-      <div class="hero-foot mono"><span>FROM THE FIRST IDEA TO THE FINAL BUILD.</span><span>STRATEGY → DESIGN → DEVELOPMENT</span></div>
-    </section>
-    <footer class="contact-section" id="contact" aria-labelledby="contact-title">
+
+      <nav class="scene-nav" aria-label="Cockpit destinations">
+        <span class="scene-nav-label">EXPLORE THE COCKPIT</span>
+        <div class="scene-destinations">
+          <button type="button" data-cockpit-go="home" aria-pressed="true"><span>01</span> Bridge</button>
+          <button type="button" data-cockpit-go="work" aria-pressed="false"><span>02</span> Work</button>
+          <button type="button" data-cockpit-go="services" aria-pressed="false"><span>03</span> Services</button>
+          <button type="button" data-cockpit-go="about" aria-pressed="false"><span>04</span> About</button>
+          <button type="button" data-cockpit-go="contact" aria-pressed="false"><span>05</span> Contact</button>
+          <button type="button" data-cockpit-go="helm" aria-pressed="false"><span>06</span> Helm</button>
+          <button type="button" data-cockpit-go="reverse" aria-pressed="false"><span>07</span> Look aft</button>
+        </div>
+        <button class="scene-return" type="button" data-cockpit-go="home" disabled>↶ Back to bridge</button>
+      </nav>
+      <p class="sr-only" id="cockpit-announcement" role="status" aria-live="polite"></p>
+      <div class="cockpit-intro">
+        <div><h1 id="hero-title">Websites &amp; apps.<br>Built to solve.</h1></div>
+        <div class="cockpit-intro-copy"><p>We design and develop websites and custom applications that move your business forward. A clear direction, from your first idea to the final build.</p><div class="hero-actions"><a class="quiet-link cockpit-enquiry" href="mailto:lufforsolution@gmail.com">Start a conversation <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#contact">Meet Luffor <span aria-hidden="true">↓</span></a></div></div>
+      </div>
+      <noscript><p class="wrap">We create websites, custom applications, and thoughtful interfaces. <a href="mailto:lufforsolution@gmail.com">Discuss your project with Luffor ↗</a></p></noscript>
+    </section>  <footer class="contact-section" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-top">
         <div class="contact-eyebrow reveal"><p class="eyebrow">The next chapter</p><a class="back-top mono" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div>
         <div class="contact-invitation reveal"><h2 id="contact-title">Let’s build your<br><em>next digital solution.</em></h2><a class="contact-arrow" href="mailto:lufforsolution@gmail.com" aria-label="Email Luffor about a project"><span aria-hidden="true">↗</span></a></div>

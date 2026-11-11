@@ -1,0 +1,53 @@
+import {readFile, readdir, stat} from 'node:fs/promises';
+import path from 'node:path';
+import vm from 'node:vm';
+import {fileURLToPath} from 'node:url';
+const root = fileURLToPath(new URL('../dist/', import.meta.url));
+const files = await readdir(root,{recursive:true});
+let checked = 0;
+for (const file of files) {
+  if (!(await stat(path.join(root,file))).isFile()) continue;
+  if (/\.(html|css|js)$/.test(file)) {
+    const source = await readFile(path.join(root,file),'utf8');
+    if (file.endsWith('.js') && !/[/\\]vendor[/\\]/.test(file)) new vm.Script(source,{filename:file});
+    for (const match of source.matchAll(/(?:src=["']|href=["']|url\(['"]?)(assets\/[^"'\s)]+)/g)) {
+      await stat(path.join(root,match[1])); checked++;
+    }
+  }
+}
+const window = {};
+vm.runInNewContext(await readFile(path.join(root,'site-data.js'),'utf8'),{window});
+if (!window.PORTFOLIO.brand.name || !window.PORTFOLIO.contact.email) throw new Error('Brand and enquiry details are required.');
+const html = await readFile(path.join(root,'index.html'),'utf8');
+// The cockpit ships a real glTF asset, matching local loaders, and a fallback.
+if (html.includes('cockpit.js')) {
+  for (const file of ['cockpit.js','cockpit.css','assets/cockpit-poster.png','assets/vendor/GLTFLoader.js','assets/vendor/BufferGeometryUtils.js']) await stat(path.join(root,file));
+  const model=await readFile(path.join(root,'assets/luffor-wheelhouse.glb'));
+  if(model.readUInt32LE(0)!==0x46546c67||model.readUInt32LE(4)!==2||model.readUInt32LE(8)!==model.length) throw new Error('Invalid wheelhouse GLB container.');
+  const gltf=JSON.parse(model.subarray(20,20+model.readUInt32LE(12)).toString());
+  if(gltf.meshes.length>64||model.length>8*1024*1024) throw new Error('Wheelhouse exceeds its geometry/transfer budget; merge static geometry before export.');
+  if(!gltf.nodes.some(node=>node.name==='RadarScreen')) throw new Error('Wheelhouse navigation display is missing.');
+  if(html.includes('ship-layout.js')) {
+    const layoutContext={window:{}};
+    vm.runInNewContext(await readFile(path.join(root,'ship-layout.js'),'utf8'),layoutContext);
+    const ship=layoutContext.window.LUFFOR_SHIP;
+    if(ship.crew.length!==3||ship.crew.filter(p=>p.gender==='man').length!==2||ship.crew.filter(p=>p.gender==='woman').length!==1) throw new Error('Ship crew must contain two men and one woman.');
+    for(const person of ship.crew) if(!gltf.nodes.some(n=>n.name.includes(`Dev${person.id}_black hair`))) throw new Error(`Developer ${person.id} is missing from the exported ship.`);
+    for(const [name,view] of Object.entries(ship.views)) for(const key of ['position','target','mobilePosition','mobileTarget']) if(view[key].length!==3||!view[key].every(Number.isFinite)) throw new Error(`Invalid ${name} camera ${key}.`);
+    if(ship.scale&&(!ship.scale.every(n=>Number.isFinite(n)&&n>0)||ship.scale.length!==3)) throw new Error('Ship proportions must be three positive scale values.');
+    for(const view of Object.values(ship.views)) for(const key of ['midPosition','midTarget']) if(view[key]&&(view[key].length!==3||!view[key].every(Number.isFinite))) throw new Error('Invalid tall-desktop camera.');
+    const climb=ship.stairPath.slice(1); // The first point is the approach before the stair foot.
+    if(ship.views.upper.position[1]<5||climb.some((p,i,points)=>i&&p[1]<points[i-1][1])) throw new Error('Upper-deck navigation must climb the authored stairs.');
+    if((await stat(path.join(root,'assets/ship-blockout.glb'))).size>512*1024) throw new Error('Architectural entrance must remain a lightweight asset.');
+    console.log('Cruise ship: 3 black-haired developers, finite camera stops, ascending staircase, lightweight 3D entrance.');
+  }
+  for(const file of ['assets/vendor/GLTFLoader.js','assets/vendor/BufferGeometryUtils.js']) {
+    if((await readFile(path.join(root,file),'utf8')).includes("from 'three'")) throw new Error('The local GLTF loader must not use an unresolved package import.');
+  }
+  console.log(`Wheelhouse: ${(model.length/1024/1024).toFixed(2)} MiB, ${gltf.meshes.length} meshes, valid GLB and local loaders.`);
+}
+const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
+for (const match of html.matchAll(/href="#([^"]+)"/g)) {
+  if (!ids.has(match[1]) && !match[1].startsWith('social-')) throw new Error(`Missing link target: ${match[1]}`);
+}
+console.log(`Ready: ${files.length} files, ${checked} local asset references, valid navigation and JavaScript.`);

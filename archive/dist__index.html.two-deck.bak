@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#02204F">
+  <meta name="description" content="Luffor is a digital agency helping businesses find a clear direction through complex challenges. Digital strategy, purposeful design, websites, and applications.">
+  <meta property="og:title" content="Luffor — Website & Application Development Agency">
+  <meta property="og:description" content="From an unclear idea to a useful digital solution. Strategy, design, and development, working together.">
+  <meta property="og:type" content="website">
+  <link rel="canonical" href="https://luffor-maritime-portfolio-1106.geraldi-alexis.chatgpt.site/">
+  <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="assets/fonts/instrument-serif-regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="assets/fonts/instrument-serif-italic.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="motion.css?v=1">
+  <link rel="stylesheet" href="edition.css?v=1">
+  <link rel="stylesheet" href="technology.css?v=minimal-1">
+  <link rel="stylesheet" href="assets/vendor/lenis.css">
+  <link rel="stylesheet" href="cockpit.css?v=navy-4">
+  <link rel="preload" as="image" href="assets/cockpit-poster.png">
+  <title>Luffor — Website & Application Development Agency</title>
+  <script src="site-data.js" defer></script>
+  <script src="app.js?v=minimal-1" defer></script>
+  <script src="motion.js?v=minimal-1" defer></script>
+  <script src="ink.js?v=1" defer></script>
+  <script src="ship-layout.js?v=3" defer></script>
+  <script src="cockpit.js?v=navy-4" defer></script>
+  <script src="assets/vendor/lenis.min.js" defer></script>
+  <script src="smooth-scroll.js?v=1" defer></script>
+</head>
+<body class="minimal-site cockpit-site">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="reading-progress" aria-hidden="true"><span></span></div>
+  <header class="site-header wrap" id="top">
+    <a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a>
+    <span class="header-note">Digital design &amp; development</span>
+    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
+      <button type="button" data-cockpit-go="chart">Work</button><button type="button" data-cockpit-go="console">Services</button><a class="nav-link" href="#contact">Let’s talk <span class="small-arrow" aria-hidden="true">↗</span></a>
+    </nav>
+  </header>
+  <main id="main">
+    <section class="hero cockpit-hero" id="hero" aria-labelledby="hero-title">
+      <div class="wheelhouse" id="wheelhouse" data-renderer="loading" aria-label="Explore Luffor’s two-deck cruise ship">
+        <img class="cockpit-poster" src="assets/cockpit-poster.png" width="1440" height="850" alt="A spacious cruise-ship bridge with a developer, an open staircase to the upper deck, and a lighthouse outside the right window." fetchpriority="high">
+        <canvas class="cockpit-canvas" aria-hidden="true"></canvas>
+        <div class="scene-topline"><button class="scene-pause" type="button" aria-pressed="false" aria-label="Pause wheelhouse animation" hidden>Ⅱ &nbsp; Pause</button></div>
+        <div class="scene-loading" role="status">COMING ABOARD</div>
+        <div class="scene-hotspots" aria-label="Objects to explore">
+          <button class="scene-hotspot" data-cockpit-go="chart" aria-label="Explore work at the chart table" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">Explore our work</span></button>
+          <button class="scene-hotspot" data-cockpit-go="console" aria-label="Explore services at the instruments" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">Our services</span></button>
+          <button class="scene-hotspot" data-cockpit-go="radio" aria-label="Contact Luffor at the radio" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">Send a signal</span></button>
+          <button class="scene-hotspot" data-cockpit-go="lighthouse" aria-label="Look out at the lighthouse" hidden><span class="hotspot-ring" aria-hidden="true">+</span><span class="hotspot-name">The lighthouse</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="aft" aria-label="Turn around and explore the atrium" hidden><span class="hotspot-ring" aria-hidden="true">↶</span><span class="hotspot-name">Look aft</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="stairs" aria-label="Walk to the staircase" hidden><span class="hotspot-ring" aria-hidden="true">↗</span><span class="hotspot-name">The staircase</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="upper" aria-label="Go upstairs to the upper deck" hidden><span class="hotspot-ring" aria-hidden="true">↑</span><span class="hotspot-name">Go upstairs</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="overlook" aria-label="Look over the bridge from upstairs" hidden><span class="hotspot-ring" aria-hidden="true">↗</span><span class="hotspot-name">Bridge overlook</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="lounge" aria-label="Explore the crew lounge" hidden><span class="hotspot-ring" aria-hidden="true">↗</span><span class="hotspot-name">Crew lounge</span></button>
+          <button class="scene-hotspot is-waypoint" data-cockpit-go="helm" aria-label="Return downstairs to the bridge" hidden><span class="hotspot-ring" aria-hidden="true">↓</span><span class="hotspot-name">Down to the bridge</span></button>
+        </div>
+        <aside class="scene-panel" aria-labelledby="scene-panel-title" hidden><button class="scene-panel-close" type="button" aria-label="Close panel and return to helm">×</button><span class="panel-index"></span><h2 id="scene-panel-title"></h2><div class="panel-content"></div></aside>
+        <p class="scene-status">Drag to look around. Click to explore.</p>
+        <div class="scene-look" aria-label="Look around the ship"><button type="button" data-look="-1" aria-label="Look left">←</button><span>LOOK AROUND</span><button type="button" data-look="1" aria-label="Look right">→</button></div>
+        
+      </div>
+
+      <p class="sr-only" id="cockpit-announcement" role="status" aria-live="polite"></p>
+      <div class="cockpit-intro">
+        <div><h1 id="hero-title">Websites &amp; apps.<br>Built to solve.</h1></div>
+        <div class="cockpit-intro-copy"><p>We design and develop websites and custom applications that move your business forward. A clear direction, from your first idea to the final build.</p><div class="hero-actions"><a class="quiet-link cockpit-enquiry" href="mailto:lufforsolution@gmail.com">Start a conversation <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#contact">Meet Luffor <span aria-hidden="true">↓</span></a></div></div>
+      </div>
+      <nav class="scene-nav" aria-label="Wheelhouse destinations">
+        <span class="scene-nav-label">EXPLORE THE SHIP</span>
+        <div class="scene-destinations">
+          <button type="button" data-cockpit-go="helm" aria-pressed="true"><span>01</span> Bridge</button>
+          <button type="button" data-cockpit-go="aft" aria-pressed="false"><span>02</span> Look aft</button>
+          <button type="button" data-cockpit-go="stairs" aria-pressed="false"><span>03</span> Stairway</button>
+          <button type="button" data-cockpit-go="upper" aria-pressed="false"><span>04</span> Upper deck</button>
+          <button type="button" data-cockpit-go="lounge" aria-pressed="false"><span>05</span> Lounge</button>
+        </div>
+        <button class="scene-return" type="button" data-cockpit-go="helm" disabled>↶ Back to bridge</button>
+      </nav>
+      <noscript><p class="wrap">We create websites, custom applications, and thoughtful interfaces. <a href="mailto:lufforsolution@gmail.com">Discuss your project with Luffor ↗</a></p></noscript>
+    </section>  <footer class="contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="wrap contact-top">
+        <div class="contact-eyebrow reveal"><p class="eyebrow">The next chapter</p><a class="back-top mono" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div>
+        <div class="contact-invitation reveal"><h2 id="contact-title">Let’s build your<br><em>next digital solution.</em></h2><a class="contact-arrow" href="mailto:lufforsolution@gmail.com" aria-label="Email Luffor about a project"><span aria-hidden="true">↗</span></a></div>
+        <div class="contact-line reveal"><p>Tell us what you’re trying to solve.<br>We’ll start with the right questions.</p><a class="email-link" href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a></div>
+      </div>
+      <div class="footer-bottom">
+        <div class="wrap footer-grid">
+          <div class="footer-brand"><a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a><p>A clear point of view.<br>A lasting impression.</p><p class="copyright mono">© <span data-current-year>2026</span> <span data-brand-plain>Luffor</span></p></div>
+          <div class="footer-column"><p class="mono footer-label">EXPLORE</p><a href="#hero">Back to the hero</a><a href="#contact">Let’s talk</a></div>
+          <div class="footer-column"><p class="mono footer-label">ELSEWHERE</p><a href="#social-instagram" data-social="instagram">Instagram <span aria-hidden="true">↗</span></a><a href="#social-behance" data-social="behance">Behance <span aria-hidden="true">↗</span></a><a href="#social-linkedin" data-social="linkedin">LinkedIn <span aria-hidden="true">↗</span></a></div>
+          <div class="footer-column"><p class="mono footer-label">SAY HELLO</p><a href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a><p class="footer-location">Websites &amp; applications<br>Strategy. Design. Development.</p></div>
+        </div>
+        <div class="footer-art" id="tide" aria-hidden="true"><img src="assets/ocean-sail-dolphins.webp" width="2172" height="724" alt="" loading="lazy"></div>
+        <div class="footer-colophon wrap mono"><span>GUIDED BY CURIOSITY. GROUNDED IN CRAFT.</span><div class="footer-motion-controls"><button class="draw-replay mono" type="button" aria-label="Replay ocean drawing" hidden>REPLAY THE TIDE <span aria-hidden="true">↻</span></button><button class="motion-toggle mono" type="button" aria-label="Turn off animations" aria-pressed="true" hidden><span class="motion-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="motion-toggle-label">MOTION ON</span></button></div><span>DESIGNED WITH INTENTION.</span></div>
+      </div>
+    </footer>
+  </main>
+  <dialog data-lenis-prevent class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title"><button class="close-button" data-close-contact aria-label="Close contact details">Close <span aria-hidden="true">×</span></button><p class="eyebrow">The beginning of something good</p><h2 id="contact-dialog-title">Let’s talk.</h2><p id="contact-dialog-copy">This is a replaceable contact detail. Add your email address to make this space your own.</p><p class="contact-placeholder" id="contact-dialog-value">[EMAIL ADDRESS]</p><button class="text-link" data-close-contact>Back to Luffor <span aria-hidden="true">↗</span></button></dialog>
+  <noscript><style>.reveal{opacity:1!important;transform:none!important}</style></noscript>
+</body>
+</html>
