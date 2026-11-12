@@ -67,8 +67,7 @@
   skip.addEventListener('click', finishIntro);
 
   // Each panel ends with a link down to the matching section of the page.
-  const sectionLink = { work: ['#work', 'cockpit.link.work', 'See all concepts'], services: ['#pricing', 'cockpit.link.services', 'See packages &amp; prices'],
-    about: ['#industries', 'cockpit.link.about', 'Who we build for'], contact: ['#faq', 'cockpit.link.contact', 'Common questions'] };
+  const sectionLink = { services: ['#pricing', 'cockpit.link.services', 'See packages &amp; prices'] };
   const enquiry = (context, key, en) => `<a class="panel-enquiry" data-panel-contact="${context}">${L(key, en)} <span aria-hidden="true">↗</span></a>`;
   function projectPreview() {
     const p = concepts[conceptIndex], i = conceptIndex + 1;

@@ -6,8 +6,7 @@
   'use strict';
   const ID = {
     // header, hero, footer
-    'nav.pricing': 'Harga', 'nav.process': 'Proses', 'nav.work': 'Karya', 'nav.faq': 'FAQ',
-    'nav.menu': 'Menu', 'nav.talk': 'Hubungi kami',
+    'nav.pricing': 'Harga', 'nav.talk': 'Hubungi kami',
     'header.note': 'Desain &amp; pengembangan digital',
     'hero.title': 'Website &amp; aplikasi.<br>Dibangun untuk hasil.',
     'hero.copy': 'Kami merancang dan membangun website serta aplikasi custom yang mendorong bisnis Anda maju. Arah yang jelas, dari ide pertama hingga hasil akhir.',
@@ -51,45 +50,13 @@
     'offer.tag': 'Promo peluncuran',
 
     // process
-    'process.eyebrow': 'Proses', 'process.title': 'Cara proyek <em>berjalan</em>.',
-    'process.lead': 'Lima langkah, satu kontak, dan Anda selalu tahu langkah berikutnya.',
-    'step.1.name': 'Konsultasi gratis', 'step.1.copy': 'Telepon singkat atau chat WhatsApp tentang bisnis, tujuan, dan anggaran Anda.',
-    'step.2.name': 'Proposal', 'step.2.copy': 'Proposal harga tetap dengan cakupan dan jadwal. Pengerjaan dimulai setelah DP 50%.',
-    'step.3.name': 'Desain', 'step.3.copy': 'Kami mendesain halaman utama terlebih dahulu dan menyempurnakannya bersama Anda sebelum mulai membangun.',
-    'step.4.name': 'Pembangunan &amp; peluncuran', 'step.4.copy': 'Kami membangun, menguji di ponsel dan desktop, menghubungkan domain, lalu meluncurkan. Sisa 50% dibayar saat peluncuran.',
-    'step.5.name': 'Dukungan', 'step.5.copy': '30 hari perbaikan gratis setelah peluncuran, lalu perawatan bulanan opsional.',
-    'included.title': 'Termasuk di setiap proyek',
-    'included.1': 'Desain mobile-first', 'included.2': 'Cepat diakses di jaringan Indonesia', 'included.3': 'HTTPS yang aman',
-    'included.4': 'Integrasi WhatsApp', 'included.5': 'Pengaturan SEO dasar', 'included.6': 'Domain, konten, dan kode milik Anda',
-
+    
     // concept work
-    'work.eyebrow': 'Karya konsep', 'work.title': 'Cara kami memikirkan <em>antarmuka</em>.',
-    'work.lead': 'Ini adalah konsep independen untuk menunjukkan pendekatan kami, bukan proyek klien. Bisnis Anda bisa menjadi studi kasus pertama kami di sini.',
-    'concept.1.kind': 'Website perusahaan', 'concept.1.copy': 'Website berbasis layanan dengan alur yang lebih jelas dari kunjungan pertama hingga pertanyaan.',
-    'concept.2.kind': 'Website publikasi', 'concept.2.copy': 'Antarmuka editorial yang memberi ruang bagi artikel dan cerita utama.',
-    'concept.3.kind': 'Aplikasi custom', 'concept.3.copy': 'Ruang kerja bersama untuk orang, proyek, dan tugas sehari-hari.',
-    'concept.4.kind': 'Dashboard &amp; UI / UX', 'concept.4.copy': 'Antarmuka laporan yang mengubah informasi rumit menjadi ringkasan yang berguna.',
-
+    
     // industries
-    'ind.eyebrow': 'Untuk siapa', 'ind.title': 'Dibuat untuk bisnis <em>seperti milik Anda</em>.',
-    'ind.1.name': 'Toko lokal &amp; UMKM', 'ind.1.copy': 'Katalog, lokasi, dan pemesanan lewat WhatsApp.',
-    'ind.2.name': 'Restoran &amp; kafe', 'ind.2.copy': 'Menu, reservasi, dan tautan pesan antar.',
-    'ind.3.name': 'Klinik &amp; kesehatan', 'ind.3.copy': 'Layanan, jadwal praktik, dan permintaan janji temu.',
-    'ind.4.name': 'Properti', 'ind.4.copy': 'Daftar properti dengan foto, filter, dan formulir pertanyaan.',
-    'ind.5.name': 'Pendidikan &amp; kursus', 'ind.5.copy': 'Program, pendaftaran, dan pembayaran online.',
-    'ind.6.name': 'Jasa profesional', 'ind.6.copy': 'Website kredibel untuk konsultan, firma hukum, dan akuntan.',
-
+    
     // FAQ
-    'faq.eyebrow': 'FAQ', 'faq.title': 'Pertanyaan yang <em>sering</em> kami dengar.',
-    'faq.1.q': 'Berapa biaya pembuatan website?', 'faq.1.a': 'Lihat paket di atas. Setiap harga bersifat tetap dan disepakati sebelum mulai, jadi tidak ada biaya kejutan.',
-    'faq.2.q': 'Berapa lama pengerjaannya?', 'faq.2.a': 'Sekitar satu minggu untuk landing page, dua sampai tiga minggu untuk website company profile, dan tiga sampai empat minggu untuk toko online, setelah konten Anda siap.',
-    'faq.3.q': 'Apakah saya perlu menyiapkan konten?', 'faq.3.a': 'Kirimkan yang Anda punya: logo, foto, dan detail produk. Kami bantu menyusun dan menulis sisanya dalam bahasa Inggris atau Indonesia.',
-    'faq.4.q': 'Siapa pemilik website-nya?', 'faq.4.a': 'Anda. Domain didaftarkan atas nama Anda dan Anda menerima seluruh kode sumber saat serah terima.',
-    'faq.5.q': 'Bisakah saya memperbarui website sendiri?', 'faq.5.a': 'Bisa. Kami siapkan cara mudah untuk mengubah teks dan gambar, beserta panduan singkat.',
-    'faq.6.q': 'Bagaimana sistem pembayarannya?', 'faq.6.a': 'DP 50% untuk memulai dan 50% saat peluncuran, dengan invoice untuk setiap pembayaran.',
-    'faq.7.q': 'Apa yang terjadi setelah peluncuran?', 'faq.7.a': '30 hari perbaikan gratis sudah termasuk. Setelah itu Anda bisa memilih paket perawatan bulanan atau meminta bantuan saat dibutuhkan.',
-    'faq.8.q': 'Apakah Anda melayani bisnis di seluruh Indonesia?', 'faq.8.a': 'Ya. Kami bekerja jarak jauh dengan klien di mana pun di Indonesia, lewat WhatsApp, video call, dan email.',
-
+    
     // runtime strings (sections.js, cockpit-studio.js)
     'wa.ask': 'Tanyakan paket ini', 'wa.quote': 'Minta penawaran', 'wa.offer': 'Ambil promo', 'wa.chat': 'Chat di WhatsApp',
     'mail.ask': 'Email tentang paket ini', 'mail.quote': 'Minta penawaran lewat email', 'mail.offer': 'Ambil promo lewat email', 'mail.chat': 'Kirim email',
@@ -115,9 +82,7 @@
     'cockpit.start': 'Mulai percakapan',
     'cockpit.contact.copy': 'Ceritakan apa yang ingin Anda selesaikan. Kami mulai dengan pertanyaan yang tepat.',
     'cockpit.contact.signoff': 'BAB BERIKUTNYA DIMULAI DARI SEBUAH PERCAKAPAN.',
-    'cockpit.link.work': 'Lihat semua konsep', 'cockpit.link.services': 'Lihat paket &amp; harga', 'cockpit.link.about': 'Untuk siapa kami bekerja',
-    'cockpit.link.contact': 'Pertanyaan umum',
-    'cockpit.label.home': 'Anjungan. Geser untuk melihat sekeliling. Klik untuk menjelajah.', 'cockpit.label.work': 'Lemari karya',
+    'cockpit.link.services': 'Lihat paket &amp; harga', 'cockpit.label.home': 'Anjungan. Geser untuk melihat sekeliling. Klik untuk menjelajah.', 'cockpit.label.work': 'Lemari karya',
     'cockpit.label.services': 'Meja peta', 'cockpit.label.about': 'Pos pengawas', 'cockpit.label.contact': 'Stasiun radio',
     'cockpit.label.helm': 'Meja kemudi', 'cockpit.label.reverse': 'Melihat ke belakang dari haluan',
     'lang.switch': 'Switch language to English'

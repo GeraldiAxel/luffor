@@ -16,13 +16,13 @@ The page now opens on a single-deck ship's wheelhouse adapted into a developer s
 
 ## Agency sections and languages
 
-Below the hero, in order: **Packages** (`#pricing`), **Process** (`#process`), **Concept work** (`#work`), **Who it's for** (`#industries`) and **FAQ** (`#faq`), then the existing contact footer.
+Below the hero: **Packages** (`#pricing`), then the existing contact footer. Nothing else is on the page by design.
 
 - **Prices, WhatsApp and the launch offer** are set in `dist/site-data.js`. Prices are plain rupiah numbers; until set, cards show a visible `[Price]`. Without a WhatsApp number every chat button falls back to email. The launch-offer banner stays hidden until `discountPercent` is a number. `npm run check` lists anything still missing.
 - **English and Bahasa Indonesia.** English is written in `dist/index.html`. Indonesian lives in `dist/i18n.js`, keyed by each element's `data-i18n`. The EN / ID switch in the header remembers the choice; `?lang=id` opens in Indonesian. `npm run check` fails if any page text lacks an Indonesian entry.
-- `dist/sections.css` holds the styles, `dist/sections.js` fills prices and WhatsApp links (with a prefilled message per package, in the visitor's language), runs the launch offer, the card spotlight, the process progress rail and the phone menu.
-- Package contents, timelines, the 50% / 50% payment terms and the 30-day support period are written as defaults. Edit them in `index.html` and `i18n.js` to match what Luffor actually offers.
-- The marquee, beam sweep and signal dot stop with the footer motion switch or the system reduced-motion setting.
+- `dist/sections.css` holds the styles, `dist/sections.js` fills prices and WhatsApp links (with a prefilled message per package, in the visitor's language), runs the launch offer and the card spotlight.
+- Package contents and revision counts are written as defaults. Edit them in `index.html` and `i18n.js` to match what Luffor actually offers.
+- The beam sweep on the featured card stops with the footer motion switch or the system reduced-motion setting.
 
 The earlier two-deck cruise-ship hero is archived, not deleted: `dist/cockpit.js`, `dist/ship-layout.js`, `dist/assets/luffor-wheelhouse.glb`, `dist/assets/ship-blockout.glb`, `dist/assets/cockpit-poster.png` and `artwork/` are no longer loaded by the page. `archive/` holds the pre-change copies of `dist/index.html`, `scripts/check.mjs` and this README. The description below refers to that archived hero.
 

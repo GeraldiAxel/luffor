@@ -1,4 +1,4 @@
-/* Packages, WhatsApp links, launch offer and the header menu. Values come from site-data.js. */
+/* Packages, WhatsApp links, launch offer and card spotlight. Values come from site-data.js. */
 (() => {
   'use strict';
   const data = window.PORTFOLIO || {};
@@ -70,37 +70,12 @@
     }
   }
 
-  // Header: the section links show inline on wide screens and in a dropdown on phones.
-  const menu = document.querySelector('.nav-menu');
-  const wide = matchMedia('(min-width: 761px)');
-  const syncMenu = () => { if (menu) menu.open = wide.matches; };
-  wide.addEventListener('change', syncMenu);
-  menu?.addEventListener('click', e => { if (!wide.matches && e.target.closest('.nav-link')) menu.open = false; });
-  document.addEventListener('click', e => { if (menu && !wide.matches && menu.open && !menu.contains(e.target)) menu.open = false; });
-
   // Cursor spotlight on cards.
   document.querySelectorAll('.ls-spot').forEach(card => card.addEventListener('pointermove', e => {
     const r = card.getBoundingClientRect();
     card.style.setProperty('--mx', (e.clientX - r.left) + 'px'); card.style.setProperty('--my', (e.clientY - r.top) + 'px');
   }));
 
-  // Process: the rail fills and step numbers light up as the visitor scrolls through the steps.
-  const steps = document.querySelector('[data-steps]');
-  if (steps) {
-    const items = [...steps.children];
-    let queued = false;
-    const update = () => {
-      queued = false;
-      const r = steps.getBoundingClientRect(), mark = innerHeight * 0.62;
-      const p = Math.min(Math.max((mark - r.top) / r.height, 0), 1);
-      steps.style.setProperty('--progress', p.toFixed(3));
-      items.forEach(li => li.classList.toggle('is-reached', li.getBoundingClientRect().top < mark));
-    };
-    const queue = () => { if (!queued) { queued = true; requestAnimationFrame(update); } };
-    addEventListener('scroll', queue, { passive: true }); addEventListener('resize', queue); update();
-  }
-
-  syncMenu();
   render();
   addEventListener('luffor:langchange', render);
 })();
