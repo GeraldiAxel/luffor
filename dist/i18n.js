@@ -51,7 +51,35 @@
 
     // process
     
-    // concept work
+    // the inspected concept, the concept index and the first-message note (body.css / body.js)
+    'look.title': 'Satu layar, dan tiga keputusan <em>di dalamnya.</em>',
+    'look.lead': 'Common Ground adalah ruang kerja tim yang kami rancang sebagai konsep, bukan untuk klien. Kami tampilkan di sini agar Anda bisa menilai sendiri perhatian yang akan didapat layar milik Anda.',
+    'look.caption': 'Common Ground · aplikasi custom · konsep antarmuka dengan konten demonstrasi',
+    'look.1.name': 'Filter',
+    'look.1.copy': 'Tiga filter berada di atas papan. Memilih “Assigned to me” mengganti pekerjaan semua orang dengan pekerjaan Anda sendiri, tanpa berpindah halaman.',
+    'look.2.name': 'Kartu tugas',
+    'look.2.copy': 'Setiap kartu menampilkan jenis pekerjaan, tugasnya, dan tim yang memegangnya. Anda tahu giliran siapa sebelum membuka apa pun.',
+    'look.3.name': 'Tahapan',
+    'look.3.copy': 'Pekerjaan bergerak dari kiri ke kanan: perencanaan, sedang dikerjakan, siap ditinjau. Angka di samping tiap tahap menunjukkan di mana pekerjaan mengantre.',
+    'index.title': 'Tiga konsep lain, dan paket yang <em>paling dekat</em> dengan masing-masing.',
+    'index.lead': 'Keempatnya adalah konsep Luffor sendiri dengan konten demonstrasi. Tidak satu pun merupakan pekerjaan klien.',
+    'index.forme.kind': 'Website perusahaan · konsep',
+    'index.forme.copy': 'Halaman dibuka dengan apa yang dikerjakan Forme dan satu tombol menuju layanannya. “Start a project” tetap ada di header untuk pengunjung yang sudah yakin.',
+    'index.forme.link': 'Paket terdekat: Website company profile',
+    'index.quiet.kind': 'Website editorial · konsep',
+    'index.quiet.copy': 'Tiga cerita membuka halaman depan, masing-masing dengan topik, judul, dan satu tautan untuk lanjut membaca. Tidak ada hal lain yang bersaing dengan tulisannya.',
+    'index.quiet.link': 'Paket terdekat: Website company profile',
+    'index.perspective.kind': 'Dashboard laporan · konsep',
+    'index.perspective.copy': 'Tiga tren berada di atas satu grafik aktivitas, dan panel “Your next steps” mengubah angka menjadi hal yang perlu dikerjakan. Semua angka yang tampil hanyalah ilustrasi.',
+    'index.perspective.link': 'Dihitung sebagai aplikasi web custom',
+    'brief.title': 'Pesan pertama Anda cukup <em>tiga kalimat.</em>',
+    'brief.link': 'Tulis ke Luffor',
+    'brief.1.term': 'Apa yang dikerjakan bisnis Anda',
+    'brief.1.copy': 'Dan siapa yang ingin Anda jangkau lewat website atau aplikasinya.',
+    'brief.2.term': 'Apa yang harus bisa dilakukan pengunjung',
+    'brief.2.copy': 'Memesan, membeli, bertanya, membaca. Satu tindakan yang jelas sudah cukup untuk memulai.',
+    'brief.3.term': 'Paket mana yang terlihat paling dekat',
+    'brief.3.copy': 'Atau katakan saja jika tidak ada yang cocok. Pekerjaan custom mendapat proposal dengan cakupan, harga tetap, dan jadwal.',
     
     // industries
     
@@ -69,10 +97,10 @@
     'price.placeholder': '[Harga]',
     'offer.text': 'Diskon {discount}% untuk {slots} klien pertama kami.', 'offer.textNoSlots': 'Diskon {discount}% untuk klien pertama kami.',
     'offer.until': 'Berlaku hingga {date}.',
-    'cockpit.panel.work.index': '02 / LEMARI KARYA', 'cockpit.panel.work.title': 'Arah yang lebih jelas.',
-    'cockpit.panel.services.index': '03 / MEJA PETA', 'cockpit.panel.services.title': 'Dibangun sesuai bisnis Anda.',
-    'cockpit.panel.about.index': '04 / POS PENGAWAS', 'cockpit.panel.about.title': 'Kru kecil. Satu tujuan.',
-    'cockpit.panel.contact.index': '05 / RADIO KAPAL', 'cockpit.panel.contact.title': 'Kirim sinyal.',
+    'cockpit.panel.work.index': 'LEMARI KARYA', 'cockpit.panel.work.title': 'Arah yang lebih jelas.',
+    'cockpit.panel.services.index': 'MEJA PETA', 'cockpit.panel.services.title': 'Dibangun sesuai bisnis Anda.',
+    'cockpit.panel.about.index': 'POS PENGAWAS', 'cockpit.panel.about.title': 'Kru kecil. Satu tujuan.',
+    'cockpit.panel.contact.index': 'RADIO KAPAL', 'cockpit.panel.contact.title': 'Kirim sinyal.',
     'cockpit.concepts': 'KONSEP ANTARMUKA INDEPENDEN', 'cockpit.build': 'Bangun proyek Anda berikutnya',
     'cockpit.services.copy': 'Dari ide yang belum jelas menjadi solusi digital yang berguna. Strategi, desain, dan pengembangan, bekerja bersama.',
     'cockpit.services.1': 'Desain &amp; pengembangan website', 'cockpit.services.2': 'Aplikasi web custom', 'cockpit.services.3': 'UI / UX &amp; strategi digital',
@@ -106,9 +134,9 @@
       if (!english.has(el)) english.set(el, el.innerHTML);
       fill(el, lang === 'id' ? (ID[el.dataset.i18n] ?? english.get(el)) : english.get(el));
     });
-    document.querySelectorAll('[data-lang-toggle]').forEach(b => {
-      b.setAttribute('aria-label', lang === 'id' ? ID['lang.switch'] : 'Ganti bahasa ke Bahasa Indonesia');
-      b.querySelectorAll('[data-lang-opt]').forEach(o => o.classList.toggle('is-active', o.dataset.langOpt === lang));
+    document.querySelector('[data-current-language]').textContent = lang === 'id' ? 'Bahasa Indonesia' : 'English';
+    document.querySelectorAll('[data-language]').forEach(button => {
+      button.setAttribute('aria-pressed', String(button.dataset.language === lang));
     });
   }
   function set(next) {
@@ -121,7 +149,28 @@
   // English text is read from the page before any translation, so run as soon as the DOM is parsed.
   const start = () => {
     apply();
-    document.addEventListener('click', e => { if (e.target.closest('[data-lang-toggle]')) set(lang === 'id' ? 'en' : 'id'); });
+    const menus = [...document.querySelectorAll('.nav-disclosure')];
+    function close(menu, restoreFocus) {
+      menu.open = false;
+      if (restoreFocus) menu.querySelector('summary').focus();
+    }
+    document.addEventListener('click', event => {
+      const option = event.target.closest('[data-language]');
+      if (option) set(option.dataset.language);
+      for (const menu of menus) {
+        if (!menu.open) continue;
+        if (option || !menu.contains(event.target) || event.target.closest('a')) {
+          close(menu, Boolean(option && menu.contains(option)));
+        }
+      }
+    });
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') menus.filter(menu => menu.open).forEach(menu => close(menu, true));
+    });
+    document.addEventListener('focusin', event => {
+      menus.filter(menu => menu.open && !menu.contains(event.target)).forEach(menu => close(menu, false));
+    });
+    matchMedia('(max-width: 760px)').addEventListener('change', () => menus.forEach(menu => close(menu, false)));
   };
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start, { once: true }); else start();
 })();

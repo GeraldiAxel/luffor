@@ -34,10 +34,10 @@
   // Destination ids match `destinations[].id` in scene_manifest.json.
   const places = {
     home: { label: 'The bridge. Drag to look around. Click to explore.' },
-    work: { label: 'The work locker', index: '02 / WORK LOCKER', title: 'A clearer way forward.' },
-    services: { label: 'The chart table', index: '03 / CHART TABLE', title: 'Built around your business.' },
-    about: { label: 'The lookout', index: '04 / THE LOOKOUT', title: 'A small crew. One heading.' },
-    contact: { label: 'The radio station', index: '05 / MARINE RADIO', title: 'Send a signal.' },
+    work: { label: 'The work locker', index: 'WORK LOCKER', title: 'A clearer way forward.' },
+    services: { label: 'The chart table', index: 'CHART TABLE', title: 'Built around your business.' },
+    about: { label: 'The lookout', index: 'THE LOOKOUT', title: 'A small crew. One heading.' },
+    contact: { label: 'The radio station', index: 'MARINE RADIO', title: 'Send a signal.' },
     helm: { label: 'The helm desk' },
     reverse: { label: 'Looking aft from the bow' }
   };
@@ -71,7 +71,7 @@
   const enquiry = (context, key, en) => `<a class="panel-enquiry" data-panel-contact="${context}">${L(key, en)} <span aria-hidden="true">↗</span></a>`;
   function projectPreview() {
     const p = concepts[conceptIndex], i = conceptIndex + 1;
-    content.innerHTML = `<p class="panel-concept-note">${L('cockpit.concepts', 'INDEPENDENT INTERFACE CONCEPTS')}</p><img class="panel-project-image" src="${p.image}" width="1600" height="1000" alt="${p.name} ${p.kind.toLowerCase()} interface concept"><div class="panel-project-nav">${concepts.map((c, n) => `<button type="button" data-concept="${n}" aria-label="View ${c.name} concept" aria-pressed="${n === conceptIndex}">${String(n + 1).padStart(2, '0')}</button>`).join('')}</div><h3>${p.name}</h3><p>${L('concept.' + i + '.copy', p.copy)}</p>${enquiry('general', 'cockpit.build', 'Build your next project')}`;
+    content.innerHTML = `<p class="panel-concept-note">${L('cockpit.concepts', 'INDEPENDENT INTERFACE CONCEPTS')}</p><img class="panel-project-image" src="${p.image}" width="1600" height="1000" alt="${p.name} ${p.kind.toLowerCase()} interface concept"><div class="panel-project-nav">${concepts.map((c, n) => `<button type="button" data-concept="${n}" aria-label="View ${c.name} concept" aria-pressed="${n === conceptIndex}">${c.name}</button>`).join('')}</div><h3>${p.name}</h3><p>${L('concept.' + i + '.copy', p.copy)}</p>${enquiry('general', 'cockpit.build', 'Build your next project')}`;
     finishPanel('work');
   }
   function finishPanel(name) {
@@ -97,8 +97,8 @@
     title.textContent = L(`cockpit.panel.${name}.title`, place.title);
     if (name === 'work') projectPreview();
     else {
-      if (name === 'services') content.innerHTML = `<p>${L('cockpit.services.copy', 'From an unclear idea to a useful digital solution. Strategy, design, and development, working together.')}</p><ul class="panel-service-list"><li>01 &nbsp; ${L('cockpit.services.1', 'Website design &amp; development')}</li><li>02 &nbsp; ${L('cockpit.services.2', 'Custom web applications')}</li><li>03 &nbsp; ${L('cockpit.services.3', 'UI / UX &amp; digital strategy')}</li></ul>${enquiry('general', 'cockpit.discuss', 'Discuss your project')}`;
-      else if (name === 'about') content.innerHTML = `<p>${L('cockpit.about.copy', 'Luffor is a digital agency helping businesses find a clear direction through complex challenges.')}</p><ul class="panel-service-list"><li>01 &nbsp; ${L('cockpit.about.1', 'At the helm: development')}</li><li>02 &nbsp; ${L('cockpit.about.2', 'At the chart table: strategy &amp; planning')}</li><li>03 &nbsp; ${L('cockpit.about.3', 'On lookout: design &amp; UI / UX')}</li></ul>${enquiry('general', 'cockpit.start', 'Start a conversation')}`;
+      if (name === 'services') content.innerHTML = `<p>${L('cockpit.services.copy', 'From an unclear idea to a useful digital solution. Strategy, design, and development, working together.')}</p><ul class="panel-service-list"><li>${L('cockpit.services.1', 'Website design &amp; development')}</li><li>${L('cockpit.services.2', 'Custom web applications')}</li><li>${L('cockpit.services.3', 'UI / UX &amp; digital strategy')}</li></ul>${enquiry('general', 'cockpit.discuss', 'Discuss your project')}`;
+      else if (name === 'about') content.innerHTML = `<p>${L('cockpit.about.copy', 'Luffor is a digital agency helping businesses find a clear direction through complex challenges.')}</p><ul class="panel-service-list"><li>${L('cockpit.about.1', 'At the helm: development')}</li><li>${L('cockpit.about.2', 'At the chart table: strategy &amp; planning')}</li><li>${L('cockpit.about.3', 'On lookout: design &amp; UI / UX')}</li></ul>${enquiry('general', 'cockpit.start', 'Start a conversation')}`;
       else if (name === 'contact') content.innerHTML = `<p>${L('cockpit.contact.copy', 'Tell us what you’re trying to solve. We’ll start with the right questions.')}</p><a class="panel-enquiry" data-panel-contact="general"><span class="panel-email"></span> <span aria-hidden="true">↗</span></a><p class="radio-signoff">${L('cockpit.contact.signoff', 'YOUR NEXT CHAPTER STARTS WITH A CONVERSATION.')}</p>`;
       finishPanel(name);
     }

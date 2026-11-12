@@ -16,13 +16,16 @@ The page now opens on a single-deck ship's wheelhouse adapted into a developer s
 
 ## Agency sections and languages
 
-Below the hero: **Packages** (`#pricing`), then the existing contact footer. Nothing else is on the page by design.
+Below the hero, in order: **one concept inspected** (`#work`), **the other three concepts**, **Packages** (`#pricing`), a short **first-message note**, then the existing contact footer.
+
+- `dist/body.css` and `dist/body.js` hold the inspected concept, the concept index and the first-message note. Every selector starts with `.lb-`, so these files do not touch the hero, packages or footer.
+- The inspector shows the whole Common Ground screen beside a square crop. Each decision button carries `data-crop="x,y,size"` in the artwork's 1280 × 800 coordinates; choosing one moves the crop and its outline. To inspect a different screen, change the two image paths and the three crops in `index.html`.
+- All four interfaces are labelled as Luffor's own concepts. Replace them, and the "nearest package" links, when there is commissioned work to show.
 
 - **Prices, WhatsApp and the launch offer** are set in `dist/site-data.js`. Prices are plain rupiah numbers; until set, cards show a visible `[Price]`. Without a WhatsApp number every chat button falls back to email. The launch-offer banner stays hidden until `discountPercent` is a number. `npm run check` lists anything still missing.
 - **English and Bahasa Indonesia.** English is written in `dist/index.html`. Indonesian lives in `dist/i18n.js`, keyed by each element's `data-i18n`. The EN / ID switch in the header remembers the choice; `?lang=id` opens in Indonesian. `npm run check` fails if any page text lacks an Indonesian entry.
 - `dist/sections.css` holds the styles, `dist/sections.js` fills prices and WhatsApp links (with a prefilled message per package, in the visitor's language), runs the launch offer and the card spotlight.
 - Package contents and revision counts are written as defaults. Edit them in `index.html` and `i18n.js` to match what Luffor actually offers.
-- The beam sweep on the featured card stops with the footer motion switch or the system reduced-motion setting.
 
 The earlier two-deck cruise-ship hero is archived, not deleted: `dist/cockpit.js`, `dist/ship-layout.js`, `dist/assets/luffor-wheelhouse.glb`, `dist/assets/ship-blockout.glb`, `dist/assets/cockpit-poster.png` and `artwork/` are no longer loaded by the page. `archive/` holds the pre-change copies of `dist/index.html`, `scripts/check.mjs` and this README. The description below refers to that archived hero.
 

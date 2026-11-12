@@ -1,3 +1,11 @@
+# Original 3D wheelhouse
+
+The hero is original Blender-authored geometry, generated reproducibly with `scripts/build-cockpit.py` and saved as `artwork/luffor-wheelhouse.blend`. The daylit ship studio has an angled wraparound bow, clipped hull corners, vaulted ceilings, a curved mezzanine and balustrade, open stairway, oval work island, curved banquette, rugs, shelves, books, plants and three adult low-poly developers (two men and one woman, all black-haired). Two developers are seated at their workstations. The teak helm, gauges, radio, chart table, lighthouse, rocks, and timber texture are also original. Static geometry is merged by material, with character materials retained as independent groups. No Basement Studio geometry, textures, audio, or code are included.
+
+Production asset: `dist/assets/luffor-wheelhouse.glb`. The fallback image, `dist/assets/cockpit-poster.png`, is rendered with Blender Cycles. Dynamic sea, radar, lighthouse lighting, and the beam volume are implemented in `dist/cockpit.js`. The saved Blender scene includes preview lighting; the browser creates its own lights.
+
+The entrance uses `dist/assets/ship-blockout.glb`, a lightweight Blender-authored architectural model displayed with actual mesh edges. `dist/ship-layout.js` exports authored camera positions, stair waypoints, crew locations, and entrance movement. The Blender file retains the blockout collection and keyed entrance camera. No image dithering is used.
+
 # Maritime engraving
 
 Generated with the built-in image generation tool, then encoded as WebP without altering the composition.

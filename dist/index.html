@@ -18,7 +18,8 @@
   <link rel="stylesheet" href="technology.css?v=minimal-1">
   <link rel="stylesheet" href="assets/vendor/lenis.css">
   <link rel="stylesheet" href="cockpit.css?v=studio-2">
-  <link rel="stylesheet" href="sections.css?v=5">
+  <link rel="stylesheet" href="sections.css?v=6">
+  <link rel="stylesheet" href="body.css?v=1">
   <link rel="preload" as="image" href="assets/cockpit-studio/poster.webp">
   <title>Luffor — Website & Application Development Agency</title>
   <script src="site-data.js" defer></script>
@@ -27,6 +28,7 @@
   <script src="motion.js?v=minimal-1" defer></script>
   <script src="ink.js?v=1" defer></script>
   <script src="sections.js?v=3" defer></script>
+  <script src="body.js?v=1" defer></script>
   <script src="cockpit-studio.js?v=5" defer></script>
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="smooth-scroll.js?v=1" defer></script>
@@ -36,11 +38,26 @@
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="site-header wrap" id="top">
     <a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a>
-    <span class="header-note" data-i18n="header.note">Digital design &amp; development</span>
-    <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <a class="nav-link" href="#pricing" data-i18n="nav.pricing">Pricing</a>
-      <button class="lang-toggle" type="button" data-lang-toggle aria-label="Ganti bahasa ke Bahasa Indonesia"><span data-lang-opt="en" class="is-active">EN</span> / <span data-lang-opt="id">ID</span></button>
-      <a class="nav-link nav-cta" href="#contact"><span data-i18n="nav.talk">Let’s talk</span> <span class="small-arrow" aria-hidden="true">↗</span></a>
+    <nav class="studio-nav" aria-label="Main navigation">
+      <a class="desktop-item" href="#work" data-i18n="dest.work">Work</a>
+      <a class="desktop-item" href="#pricing" data-i18n="nav.pricing">Pricing</a>
+      <details class="desktop-item nav-disclosure">
+        <summary><span data-current-language>English</span></summary>
+        <div class="nav-sheet">
+          <button type="button" lang="en" data-language="en">English</button>
+          <button type="button" lang="id" data-language="id">Bahasa Indonesia</button>
+        </div>
+      </details>
+      <a class="studio-contact" href="#contact"><span data-i18n="nav.talk">Let’s talk</span> <span aria-hidden="true">↗</span></a>
+      <details class="mobile-item nav-disclosure">
+        <summary>Menu</summary>
+        <div class="nav-sheet">
+          <a href="#work" data-i18n="dest.work">Work</a>
+          <a href="#pricing" data-i18n="nav.pricing">Pricing</a>
+          <button type="button" lang="en" data-language="en">English</button>
+          <button type="button" lang="id" data-language="id">Bahasa Indonesia</button>
+        </div>
+      </details>
     </nav>
   </header>
   <main id="main">
@@ -68,13 +85,13 @@
       <nav class="scene-nav" aria-label="Cockpit destinations">
         <span class="scene-nav-label" data-i18n="cockpit.explore">EXPLORE THE COCKPIT</span>
         <div class="scene-destinations">
-          <button type="button" data-cockpit-go="home" aria-pressed="true"><span>01</span> <span data-i18n="dest.home">Bridge</span></button>
-          <button type="button" data-cockpit-go="work" aria-pressed="false"><span>02</span> <span data-i18n="dest.work">Work</span></button>
-          <button type="button" data-cockpit-go="services" aria-pressed="false"><span>03</span> <span data-i18n="dest.services">Services</span></button>
-          <button type="button" data-cockpit-go="about" aria-pressed="false"><span>04</span> <span data-i18n="dest.about">About</span></button>
-          <button type="button" data-cockpit-go="contact" aria-pressed="false"><span>05</span> <span data-i18n="dest.contact">Contact</span></button>
-          <button type="button" data-cockpit-go="helm" aria-pressed="false"><span>06</span> <span data-i18n="dest.helm">Helm</span></button>
-          <button type="button" data-cockpit-go="reverse" aria-pressed="false"><span>07</span> <span data-i18n="dest.reverse">Look aft</span></button>
+          <button type="button" data-cockpit-go="home" aria-pressed="true"><span data-i18n="dest.home">Bridge</span></button>
+          <button type="button" data-cockpit-go="work" aria-pressed="false"><span data-i18n="dest.work">Work</span></button>
+          <button type="button" data-cockpit-go="services" aria-pressed="false"><span data-i18n="dest.services">Services</span></button>
+          <button type="button" data-cockpit-go="about" aria-pressed="false"><span data-i18n="dest.about">About</span></button>
+          <button type="button" data-cockpit-go="contact" aria-pressed="false"><span data-i18n="dest.contact">Contact</span></button>
+          <button type="button" data-cockpit-go="helm" aria-pressed="false"><span data-i18n="dest.helm">Helm</span></button>
+          <button type="button" data-cockpit-go="reverse" aria-pressed="false"><span data-i18n="dest.reverse">Look aft</span></button>
         </div>
         <button class="scene-return" type="button" data-cockpit-go="home" disabled data-i18n="cockpit.back">↶ Back to bridge</button>
       </nav>
@@ -86,16 +103,82 @@
       <noscript><p class="wrap">We create websites, custom applications, and thoughtful interfaces. <a href="mailto:lufforsolution@gmail.com">Discuss your project with Luffor ↗</a></p></noscript>
     </section>
 
-    <!-- ======================================================= pricing -->
+    <section class="lb-section lb-look" id="work" aria-labelledby="work-heading">
+      <div class="wrap">
+        <header class="lb-head">
+          <h2 id="work-heading" data-i18n="look.title">One screen, and three decisions <em>inside it.</em></h2>
+          <p class="lb-lead" data-i18n="look.lead">Common Ground is a team workspace we designed as a concept, not for a client. It’s here so you can judge the attention a screen of yours would get.</p>
+        </header>
+        <div class="lb-inspect" data-inspect>
+          <figure class="lb-overview">
+            <div class="lb-screen">
+              <img src="assets/interface-common-ground.svg" width="1280" height="800" alt="Common Ground project board concept: a sidebar, three filters, and six task cards in three columns named Planning, In progress and Ready to review.">
+              <span class="lb-mark" aria-hidden="true"></span>
+            </div>
+            <figcaption class="lb-caption" data-i18n="look.caption">Common Ground · custom application · interface concept with demonstration content</figcaption>
+          </figure>
+          <div class="lb-loupe" aria-hidden="true"><img src="assets/interface-common-ground.svg" width="1280" height="800" alt=""></div>
+          <ul class="lb-decisions" role="list">
+            <li><button type="button" data-crop="226,92,410" aria-pressed="true"><span class="lb-decision-name" data-i18n="look.1.name">The filters</span><span class="lb-decision-copy" data-i18n="look.1.copy">Three filters sit above the board. Choosing “Assigned to me” swaps everyone’s work for your own, without leaving the page.</span></button></li>
+            <li><button type="button" data-crop="572,290,300" aria-pressed="false"><span class="lb-decision-name" data-i18n="look.2.name">A task card</span><span class="lb-decision-copy" data-i18n="look.2.copy">Each card shows the kind of work, the task and the team that owns it. You can tell whose move it is before opening anything.</span></button></li>
+            <li><button type="button" data-crop="786,236,430" aria-pressed="false"><span class="lb-decision-name" data-i18n="look.3.name">The stages</span><span class="lb-decision-copy" data-i18n="look.3.copy">Work moves left to right: planning, in progress, ready to review. The count beside each stage shows where things are queuing.</span></button></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="lb-section lb-index" aria-labelledby="index-heading">
+      <div class="wrap">
+        <header class="lb-head">
+          <h2 id="index-heading" data-i18n="index.title">Three more concepts, and the package <em>closest</em> to each.</h2>
+          <p class="lb-lead" data-i18n="index.lead">All four are Luffor’s own concepts with demonstration content. None of them is client work.</p>
+        </header>
+        <article class="lb-row">
+          <div class="lb-shots">
+            <img src="assets/interface-forme.svg" width="1280" height="800" loading="lazy" alt="Forme company website concept on a desktop screen.">
+            <img src="assets/interface-forme-portrait.svg" width="600" height="800" loading="lazy" alt="The same Forme page on a phone.">
+          </div>
+          <div>
+            <p class="lb-kind" data-i18n="index.forme.kind">Company website · concept</p>
+            <h3>Forme</h3>
+            <p class="lb-row-copy" data-i18n="index.forme.copy">The page opens with what Forme does and one button to its services. “Start a project” stays in the header for visitors who have already decided.</p>
+            <a class="lb-link" href="#pricing"><span data-i18n="index.forme.link">Nearest package: Company website</span> <span aria-hidden="true">↓</span></a>
+          </div>
+        </article>
+        <article class="lb-row">
+          <div class="lb-shots">
+            <img src="assets/interface-quiet-edit.svg" width="1280" height="800" loading="lazy" alt="The Quiet Edit editorial website concept on a desktop screen.">
+            <img src="assets/interface-quiet-edit-portrait.svg" width="600" height="800" loading="lazy" alt="The same Quiet Edit page on a phone.">
+          </div>
+          <div>
+            <p class="lb-kind" data-i18n="index.quiet.kind">Editorial website · concept</p>
+            <h3>The Quiet Edit</h3>
+            <p class="lb-row-copy" data-i18n="index.quiet.copy">Three stories lead the front page, each with its topic, a headline and a single link to read on. Nothing else competes with the writing.</p>
+            <a class="lb-link" href="#pricing"><span data-i18n="index.quiet.link">Nearest package: Company website</span> <span aria-hidden="true">↓</span></a>
+          </div>
+        </article>
+        <article class="lb-row">
+          <div class="lb-shots">
+            <img src="assets/interface-perspective.svg" width="1280" height="800" loading="lazy" alt="Perspective reporting dashboard concept on a desktop screen.">
+            <img src="assets/interface-perspective-portrait.svg" width="600" height="800" loading="lazy" alt="The same Perspective dashboard on a phone.">
+          </div>
+          <div>
+            <p class="lb-kind" data-i18n="index.perspective.kind">Reporting dashboard · concept</p>
+            <h3>Perspective</h3>
+            <p class="lb-row-copy" data-i18n="index.perspective.copy">Three trends sit above one activity chart, and a “Your next steps” panel turns the numbers into things to do. All figures shown are illustrative.</p>
+            <a class="lb-link" href="#pricing"><span data-i18n="index.perspective.link">Quoted as a custom web application</span> <span aria-hidden="true">↓</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
     <section class="ls-section ls-light" id="pricing" aria-labelledby="pricing-title">
       <div class="wrap">
         <header class="ls-head reveal">
-          <p class="ls-eyebrow mono"><span>01</span> <span data-i18n="pricing.eyebrow">Packages</span></p>
           <h2 id="pricing-title" data-i18n="pricing.title">Clear prices, <em>before</em> we start.</h2>
           <p class="ls-lead" data-i18n="pricing.lead">Every package is a fixed price agreed upfront. Need something in between? We’ll quote it.</p>
         </header>
         <aside class="ls-offer reveal" data-launch-offer hidden aria-labelledby="offer-title">
-          <span class="ls-beam" aria-hidden="true"></span>
           <p class="mono ls-offer-tag"><span data-i18n="offer.tag">Launch offer</span></p>
           <p class="ls-offer-text" id="offer-title" data-offer-text></p>
           <a class="ls-button" data-wa-link data-wa-context="offer" href="#contact"><span data-wa-label>Claim the offer</span> <span aria-hidden="true">↗</span></a>
@@ -116,7 +199,6 @@
             <a class="ls-button" data-wa-link data-wa-context="landing" href="#contact"><span data-wa-label>Ask about this package</span> <span aria-hidden="true">↗</span></a>
           </article>
           <article class="ls-package ls-spot is-featured reveal" data-package="company">
-            <span class="ls-beam" aria-hidden="true"></span>
             <p class="mono ls-tier"><span data-i18n="pkg.company.tier">Business</span> <span class="ls-badge" data-i18n="pkg.recommended">Recommended</span></p>
             <h3 data-i18n="pkg.company.name">Company website</h3>
             <p class="ls-price"><span class="ls-price-from" data-i18n="price.from">From</span> <span data-price="company">[Price]</span></p>
@@ -154,6 +236,20 @@
           <a class="ls-button" data-wa-link data-wa-context="custom" href="#contact"><span data-wa-label>Request a quote</span> <span aria-hidden="true">↗</span></a>
         </div>
         <p class="ls-note mono" data-i18n="pricing.note">Prices in Indonesian rupiah, excluding third-party costs such as domain, hosting and payment fees.</p>
+      </div>
+    </section>
+
+    <section class="lb-brief" aria-labelledby="brief-heading">
+      <div class="wrap lb-brief-grid">
+        <div>
+          <h2 id="brief-heading" data-i18n="brief.title">Your first message can be <em>three sentences.</em></h2>
+          <a class="lb-link" href="#contact"><span data-i18n="brief.link">Write to Luffor</span> <span aria-hidden="true">↓</span></a>
+        </div>
+        <dl>
+          <div><dt data-i18n="brief.1.term">What your business does</dt><dd data-i18n="brief.1.copy">And who you would like the website or app to reach.</dd></div>
+          <div><dt data-i18n="brief.2.term">What a visitor should be able to do</dt><dd data-i18n="brief.2.copy">Book, buy, enquire, read. One clear action is enough to start from.</dd></div>
+          <div><dt data-i18n="brief.3.term">Which package looks closest</dt><dd data-i18n="brief.3.copy">Or say that none of them fits. Custom work gets a scoped proposal with a fixed price and timeline.</dd></div>
+        </dl>
       </div>
     </section>
 
