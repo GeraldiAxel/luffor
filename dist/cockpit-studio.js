@@ -6,7 +6,10 @@
   const stage = document.querySelector('#wheelhouse');
   if (!stage) return;
   const ASSETS = 'assets/cockpit-studio/';
-  const config = Object.freeze({ pixelRatio: 1.5, beamIntensity: 5000, beamShadows: true, lookYaw: Math.PI, lookPitch: 0.42, lightmapExt: '.webp' });
+  // Brightness: exposureStops is AgX exposure in stops (Blender scene default 0.2), lightmapBoost scales the baked
+  // lighting, fill is a soft ambient that lifts the darkest corners and the (unbaked) characters.
+  const config = Object.freeze({ pixelRatio: 1.5, beamIntensity: 3100, beamShadows: true, lookYaw: Math.PI, lookPitch: 0.42, lightmapExt: '.webp',
+    exposureStops: 0.9, lightmapBoost: 1.25, fill: 0.7 });
   const root = document.documentElement, canvas = stage.querySelector('canvas');
   const reduce = matchMedia('(prefers-reduced-motion: reduce)');
   const small = () => stage.clientWidth < 760;
@@ -141,7 +144,7 @@
     renderer.setPixelRatio(Math.min(devicePixelRatio, small() ? 1.25 : config.pixelRatio));
     renderer.outputColorSpace = THREE.SRGBColorSpace;
     renderer.toneMapping = THREE.AgXToneMapping;
-    renderer.toneMappingExposure = Math.pow(2, manifest.rendering?.exposure_stops ?? 0.2);
+    renderer.toneMappingExposure = Math.pow(2, config.exposureStops ?? manifest.rendering?.exposure_stops ?? 0.2);
     const shadows = config.beamShadows && !small();
     renderer.shadowMap.enabled = shadows; renderer.shadowMap.type = THREE.PCFSoftShadowMap;
 
@@ -362,7 +365,7 @@
       const fix = m => {
         m = m.clone();
         m.envMap = envTex; m.envMapIntensity = m.metalness > 0.5 ? 0.9 : 0.05;
-        if (lm && lmTex[lm]) { m.lightMap = lmTex[lm]; m.lightMapIntensity = manifest.lightmaps.range * Math.PI; }
+        if (lm && lmTex[lm]) { m.lightMap = lmTex[lm]; m.lightMapIntensity = manifest.lightmaps.range * Math.PI * config.lightmapBoost; }
         if (o.isSkinnedMesh) { m.emissive = m.color.clone(); m.emissiveIntensity = 0.035; }
         if (/Beam/.test(m.name)) { m.blending = THREE.AdditiveBlending; m.side = THREE.DoubleSide; }
         if (m.transparent) m.depthWrite = false;
@@ -372,7 +375,7 @@
       if (o.isSkinnedMesh) o.frustumCulled = false;
     });
     scene.add(gltf.scene);
-    scene.add(new THREE.HemisphereLight(0x23406e, 0x1a0f08, 0.25));
+    scene.add(new THREE.HemisphereLight(0x5a7bb0, 0x3a2414, config.fill));
     mixer = new THREE.AnimationMixer(gltf.scene);
     const loops = new Set(manifest.animations.map(a => a.name));
     gltf.animations.filter(c => loops.has(c.name)).forEach(c => mixer.clipAction(c).play());
