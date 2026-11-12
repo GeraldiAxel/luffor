@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Luffor cockpit - reference viewer</title>
+<style>
+  html, body { margin: 0; height: 100%; background: #000; overflow: hidden; font: 12px/1.3 ui-monospace, Menlo, Consolas, monospace; color: #f3ecd8; }
+  canvas { display: block; width: 100vw; height: 100vh; }
+  #nav { position: fixed; left: 50%; bottom: 14px; transform: translateX(-50%); display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
+  #nav button { background: rgba(2, 31, 80, .72); color: #f3ecd8; border: 1px solid rgba(243, 236, 216, .35); padding: 6px 10px; border-radius: 999px; font: inherit; cursor: pointer; }
+  #nav button.on { background: #f3ecd8; color: #021f50; }
+  .hs { position: fixed; width: 14px; height: 14px; margin: -7px 0 0 -7px; border-radius: 50%; border: 2px solid #f3ecd8; background: rgba(240, 162, 58, .55); cursor: pointer; }
+  .hs:hover::after { content: attr(data-name); position: absolute; left: 18px; top: -4px; white-space: nowrap; background: rgba(0, 0, 0, .7); padding: 2px 6px; border-radius: 4px; }
+  #status { position: fixed; left: 10px; top: 8px; opacity: .7; }
+</style>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+               "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
+</head>
+<body>
+<div id="status">loading…</div>
+<div id="nav"></div>
+<script type="module">
+import * as THREE from 'three';
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+
+// ?cam=CAM_Helm  start camera | ?intro=0  skip opening | ?time=5.5  freeze animation time (s) | ?hs=0 hide hotspots | ?wire=1 wire only
+const Q = new URLSearchParams(location.search);
+const BASE = '../';
+const status = document.getElementById('status');
+
+const renderer = new THREE.WebGLRenderer({ antialias: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+renderer.toneMapping = THREE.AgXToneMapping;
+renderer.shadowMap.enabled = true; renderer.shadowMap.type = THREE.PCFSoftShadowMap;   // only the two lighthouse spots cast
+renderer.toneMappingExposure = Math.pow(2, 1.1);       // Blender: AgX, exposure +1.1
+document.body.appendChild(renderer.domElement);
+
+const scene = new THREE.Scene();
+scene.background = new THREE.Color(0x000000);
+const wireScene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(50, 16 / 9, 0.05, 800);
+const pmrem = new THREE.PMREMGenerator(renderer);
+const envTex = pmrem.fromScene(new RoomEnvironment(), 0.04).texture;   // only for metal reflections (brass)
+
+const [manifest, routesFile] = await Promise.all([
+  fetch(BASE + 'scene_manifest.json').then(r => r.json()),
+  fetch(BASE + 'camera_routes.json').then(r => r.json())]);
+const routes = Object.fromEntries(routesFile.routes.map(r => [r.name, r]));
+const cams = Object.fromEntries(manifest.cameras.map(c => [c.name, c]));
+renderer.toneMappingExposure = Math.pow(2, manifest.rendering?.exposure_stops ?? 0.2);
+const BEAM_CD = parseFloat(Q.get('beam') ?? '5000');   // realtime lighthouse spot intensity, tuned by eye against the Cycles stills
+
+const loader = new GLTFLoader();
+const texLoader = new THREE.TextureLoader();
+const [gltf, wireGltf] = await Promise.all([loader.loadAsync(BASE + manifest.files.scene), loader.loadAsync(BASE + manifest.files.wireframe)]);
+scene.add(gltf.scene);
+
+// --- lightmaps (second UV set), baked lights off, beam spots stay realtime
+const lmTex = {};
+for (const f of manifest.files.lightmaps) {
+  const t = await texLoader.loadAsync(BASE + 'lightmaps/' + f);
+  t.colorSpace = THREE.SRGBColorSpace; t.flipY = false; t.channel = 1;
+  lmTex[f] = t;
+}
+const beams = [];
+gltf.scene.traverse(o => {
+  if (o.isLight) {
+    if (manifest.realtime_lights.keep.some(n => o.name.startsWith(n) || o.parent?.name.startsWith(n))) { beams.push(o); o.intensity = BEAM_CD; o.decay = 1.2; o.distance = 0; o.penumbra = 0.5;
+      o.castShadow = true; o.shadow.mapSize.set(2048, 2048); o.shadow.camera.near = 22; o.shadow.camera.far = 60; o.shadow.bias = -0.0008; o.shadow.radius = 3; }
+    else o.visible = false;
+  }
+  if (!o.isMesh) return;
+  if (/^(ARCH_Shell|FURN_Static|PROP_Static|INT_|ANIM_|CHAR_)/.test(o.name) || o.isSkinnedMesh) { o.castShadow = true; o.receiveShadow = true; }
+  const lm = manifest.lightmaps.objects[o.name] ?? manifest.lightmaps.objects[o.parent?.name];
+  const fix = m => {
+    m = m.clone();
+    m.envMap = envTex; m.envMapIntensity = m.metalness > 0.5 ? 0.9 : 0.05;
+    if (lm && lmTex[lm]) { m.lightMap = lmTex[lm]; m.lightMapIntensity = manifest.lightmaps.range * Math.PI; }
+    if (o.isSkinnedMesh) { m.emissive = m.color.clone(); m.emissiveIntensity = 0.035; }      // stand-in for light probes
+    if (/Beam/.test(m.name)) { m.blending = THREE.AdditiveBlending; m.depthWrite = false; m.side = THREE.DoubleSide; }
+    if (m.transparent) m.depthWrite = false;
+    return m;
+  };
+  o.material = Array.isArray(o.material) ? o.material.map(fix) : fix(o.material);
+  if (o.isSkinnedMesh) o.frustumCulled = false;
+});
+scene.add(new THREE.HemisphereLight(0x23406e, 0x1a0f08, 0.25));
+
+wireGltf.scene.traverse(o => { if (o.isLine || o.isLineSegments) o.material = new THREE.LineBasicMaterial({ color: 0xffffff }); });
+wireScene.add(wireGltf.scene);
+
+// --- animation clips (all loop over 10 s)
+const mixer = new THREE.AnimationMixer(gltf.scene);
+const clipNames = new Set(manifest.animations.map(a => a.name));
+gltf.animations.filter(c => clipNames.has(c.name)).forEach(c => mixer.clipAction(c).play());
+
+// --- camera + routes
+function applyCam(c) {
+  camera.position.fromArray(c.position); camera.quaternion.fromArray(c.quaternion);
+  setFov(c.fov_horizontal_deg);
+}
+function setFov(hDeg) { camera.fov = THREE.MathUtils.radToDeg(2 * Math.atan(Math.tan(THREE.MathUtils.degToRad(hDeg) / 2) / camera.aspect)); camera.updateProjectionMatrix(); }
+let current = Q.get('cam') || 'CAM_Opening_Hero', play = null;
+const qa = new THREE.Quaternion(), qb = new THREE.Quaternion(), va = new THREE.Vector3(), vb = new THREE.Vector3();
+function playRoute(name, onDone) { const r = routes[name]; if (r) play = { r, t: 0, onDone }; }
+function stepRoute(dt) {
+  if (!play) return;
+  play.t = Math.min(play.t + dt, play.r.duration);
+  const s = play.r.samples, f = play.t / play.r.duration * (s.length - 1), i = Math.min(Math.floor(f), s.length - 2), k = f - i;
+  camera.position.copy(va.fromArray(s[i].position).lerp(vb.fromArray(s[i + 1].position), k));
+  camera.quaternion.copy(qa.fromArray(s[i].quaternion).slerp(qb.fromArray(s[i + 1].quaternion), k));
+  setFov(s[i].fov_horizontal_deg + (s[i + 1].fov_horizontal_deg - s[i].fov_horizontal_deg) * k);
+  if (play.t >= play.r.duration) { const d = play.onDone; current = play.r.destination; play = null; d && d(); refreshNav(); }
+}
+function goTo(camName) { if (play || camName === current) return; playRoute(`ROUTE_${current.slice(4)}__to__${camName.slice(4)}`); }
+
+const nav = document.getElementById('nav');
+for (const d of manifest.destinations) {
+  const b = document.createElement('button'); b.textContent = d.label; b.dataset.cam = d.camera; b.onclick = () => goTo(d.camera); nav.appendChild(b);
+}
+function refreshNav() { nav.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.cam === current)); }
+const hsEls = Q.get('hs') === '0' ? [] : manifest.hotspots.map(h => {
+  const e = document.createElement('div'); e.className = 'hs'; e.dataset.name = h.name; e.onclick = () => goTo(h.camera);
+  document.body.appendChild(e); return { e, p: new THREE.Vector3().fromArray(h.position), cam: h.camera };
+});
+
+// --- post: wire + pixelation + block-noise reveal + ordered-dither monochrome stage
+const rtScene = new THREE.WebGLRenderTarget(2, 2, { type: THREE.HalfFloatType, samples: 4 });
+const rtWire = new THREE.WebGLRenderTarget(2, 2);
+const post = new THREE.ShaderMaterial({
+  uniforms: { tScene: { value: rtScene.texture }, tWire: { value: rtWire.texture }, uRes: { value: new THREE.Vector2() }, uProgress: { value: 1 }, uTime: { value: 0 }, uPixel: { value: 1 }, uGrain: { value: 0.012 } },
+  vertexShader: 'varying vec2 vUv; void main(){ vUv = uv; gl_Position = vec4(position.xy, 0., 1.); }',
+  fragmentShader: `
+    uniform sampler2D tScene, tWire; uniform vec2 uRes; uniform float uProgress, uTime, uPixel, uGrain; varying vec2 vUv;
+    float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float bayer(vec2 p){ int x = int(mod(p.x, 4.)), y = int(mod(p.y, 4.)); int i = x + y * 4;
+      float m[16]; m[0]=0.;m[1]=8.;m[2]=2.;m[3]=10.;m[4]=12.;m[5]=4.;m[6]=14.;m[7]=6.;m[8]=3.;m[9]=11.;m[10]=1.;m[11]=9.;m[12]=15.;m[13]=7.;m[14]=13.;m[15]=5.;
+      float v = 0.; for (int k = 0; k < 16; k++) if (k == i) v = m[k]; return (v + .5) / 16.; }
+    void main(){
+      float px = max(uPixel, 1.);
+      vec2 block = floor(gl_FragCoord.xy / px);
+      vec2 uvb = (block + .5) * px / uRes;
+      vec3 col = texture2D(tScene, px > 1.5 ? uvb : vUv).rgb;
+      gl_FragColor = vec4(col, 1.);
+      #include <tonemapping_fragment>
+      #include <colorspace_fragment>
+      col = gl_FragColor.rgb + (hash(gl_FragCoord.xy + uTime) - .5) * uGrain;
+      if (uProgress < 1.) {
+        vec2 rb = floor(gl_FragCoord.xy / 24.);
+        float thr = hash(rb) * .62 + distance((rb + .5) * 24. / uRes, vec2(.5)) * .5;
+        float r = smoothstep(thr, thr + .18, uProgress * 1.35);
+        float w = max(texture2D(tWire, vUv).r, texture2D(tWire, uvb).r * .6);
+        float flick = step(.93, hash(rb + floor(uTime * 10.))) * step(hash(rb * 1.7), .35) * .28;
+        vec3 wire = vec3(max(w, flick * hash(block)));
+        float luma = dot(col, vec3(.299, .587, .114));
+        vec3 mono = vec3(step(bayer(floor(gl_FragCoord.xy / max(px * .5, 1.))), luma * 2.4));
+        col = r < .02 ? wire : mix(mono, col, smoothstep(.45, 1., r));
+      }
+      gl_FragColor = vec4(col, 1.);
+    }` });
+const quad = new THREE.Mesh(new THREE.PlaneGeometry(2, 2), post), quadScene = new THREE.Scene(), quadCam = new THREE.Camera();
+quadScene.add(quad);
+
+function resize() {
+  const w = innerWidth, h = innerHeight; renderer.setSize(w, h, false);
+  const pr = renderer.getPixelRatio(); rtScene.setSize(w * pr, h * pr); rtWire.setSize(w * pr, h * pr); post.uniforms.uRes.value.set(w * pr, h * pr);
+  camera.aspect = w / h; if (!play) applyCam(cams[current]);
+}
+addEventListener('resize', resize);
+
+// --- opening
+const O = manifest.opening_sequence.timeline_s;
+let intro = Q.get('intro') === '0' || Q.get('cam') ? null : { t: 0 };
+resize();
+if (intro) { applyCam(cams[manifest.opening_sequence.start_camera]); current = 'CAM_Opening_Start'; playRoute('ROUTE_Opening'); post.uniforms.uProgress.value = 0; }
+if (Q.get('wire') === '1') post.uniforms.uProgress.value = 0;
+refreshNav();
+status.textContent = `${gltf.animations.length} clips · ${Object.keys(routes).length} routes · ?cam= ?intro=0 ?time=`;
+
+const clock = new THREE.Clock(), fixedT = Q.has('time') ? parseFloat(Q.get('time')) : null, v = new THREE.Vector3();
+renderer.setAnimationLoop(() => {
+  const dt = Math.min(clock.getDelta(), 0.1);
+  if (fixedT !== null) mixer.setTime(fixedT); else mixer.update(dt);
+  stepRoute(dt);
+  if (intro) {
+    intro.t += dt;
+    post.uniforms.uProgress.value = THREE.MathUtils.clamp((intro.t - O.reveal[0]) / (O.reveal[1] - O.reveal[0]), 0, 1);
+    post.uniforms.uPixel.value = THREE.MathUtils.lerp(6, 1, THREE.MathUtils.smoothstep(intro.t, O.reveal[0] + .3, O.reveal[1]));
+    if (intro.t > O.settled) { intro = null; post.uniforms.uProgress.value = 1; post.uniforms.uPixel.value = 1; }
+  }
+  post.uniforms.uTime.value = clock.elapsedTime;
+  renderer.setRenderTarget(rtScene); renderer.render(scene, camera);
+  if (post.uniforms.uProgress.value < 1) { renderer.setRenderTarget(rtWire); renderer.setClearColor(0x000000); renderer.clear(); renderer.render(wireScene, camera); }
+  renderer.setRenderTarget(null); renderer.render(quadScene, quadCam);
+  for (const h of hsEls) {
+    v.copy(h.p).project(camera);
+    const vis = v.z < 1 && Math.abs(v.x) < 1 && Math.abs(v.y) < 1 && !intro && !play && h.cam !== current;
+    h.e.style.display = vis ? 'block' : 'none';
+    if (vis) { h.e.style.left = (v.x * .5 + .5) * innerWidth + 'px'; h.e.style.top = (-v.y * .5 + .5) * innerHeight + 'px'; }
+  }
+});
+window.__luffor = { scene, camera, gltf, manifest, routes, renderer };
+</script>
+</body>
+</html>
