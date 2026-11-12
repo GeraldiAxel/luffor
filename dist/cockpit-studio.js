@@ -20,7 +20,9 @@
   const hotspots = [...stage.querySelectorAll('.scene-hotspot')];
   const loadingLabel = stage.querySelector('.scene-loading');
   const email = window.PORTFOLIO?.contact?.email || 'lufforsolution@gmail.com';
-  document.querySelector('.cockpit-enquiry').href = 'mailto:' + email;
+  // Copy is English here; Indonesian comes from i18n.js (keys cockpit.*). sections.js owns the WhatsApp/email links.
+  const L = (key, en) => window.LufforI18n ? window.LufforI18n.t(key, en) : en;
+  const contactHref = context => window.LufforContact ? window.LufforContact.href(context) : 'mailto:' + email;
 
   // The scene fills the first viewport together with the site header and the destination bar below it.
   const chrome = [document.querySelector('.site-header'), document.querySelector('.scene-nav')].filter(Boolean);
@@ -64,29 +66,47 @@
   }
   skip.addEventListener('click', finishIntro);
 
+  // Each panel ends with a link down to the matching section of the page.
+  const sectionLink = { work: ['#work', 'cockpit.link.work', 'See all concepts'], services: ['#pricing', 'cockpit.link.services', 'See packages &amp; prices'],
+    about: ['#industries', 'cockpit.link.about', 'Who we build for'], contact: ['#faq', 'cockpit.link.contact', 'Common questions'] };
+  const enquiry = (context, key, en) => `<a class="panel-enquiry" data-panel-contact="${context}">${L(key, en)} <span aria-hidden="true">↗</span></a>`;
   function projectPreview() {
-    const p = concepts[conceptIndex];
-    content.innerHTML = `<p class="panel-concept-note">INDEPENDENT INTERFACE CONCEPTS</p><img class="panel-project-image" src="${p.image}" width="1600" height="1000" alt="${p.name} ${p.kind.toLowerCase()} interface concept"><div class="panel-project-nav">${concepts.map((c, i) => `<button type="button" data-concept="${i}" aria-label="View ${c.name} concept" aria-pressed="${i === conceptIndex}">${String(i + 1).padStart(2, '0')}</button>`).join('')}</div><h3>${p.name}</h3><p>${p.copy}</p><a class="panel-enquiry">Build your next project <span aria-hidden="true">↗</span></a>`;
-    content.querySelector('.panel-enquiry').href = 'mailto:' + email;
+    const p = concepts[conceptIndex], i = conceptIndex + 1;
+    content.innerHTML = `<p class="panel-concept-note">${L('cockpit.concepts', 'INDEPENDENT INTERFACE CONCEPTS')}</p><img class="panel-project-image" src="${p.image}" width="1600" height="1000" alt="${p.name} ${p.kind.toLowerCase()} interface concept"><div class="panel-project-nav">${concepts.map((c, n) => `<button type="button" data-concept="${n}" aria-label="View ${c.name} concept" aria-pressed="${n === conceptIndex}">${String(n + 1).padStart(2, '0')}</button>`).join('')}</div><h3>${p.name}</h3><p>${L('concept.' + i + '.copy', p.copy)}</p>${enquiry('general', 'cockpit.build', 'Build your next project')}`;
+    finishPanel('work');
   }
-  function showPanel(name) {
+  function finishPanel(name) {
+    content.querySelectorAll('[data-panel-contact]').forEach(a => {
+      a.href = contactHref(a.dataset.panelContact);
+      if (/^https:/.test(a.href)) { a.target = '_blank'; a.rel = 'noopener noreferrer'; }
+    });
+    const mail = content.querySelector('.panel-email');
+    if (mail) mail.textContent = window.LufforContact?.hasWhatsApp ? L('wa.chat', 'Chat on WhatsApp') : email;
+    const s = sectionLink[name];
+    if (s) {
+      const a = document.createElement('a');
+      a.className = 'panel-section-link'; a.href = s[0]; a.innerHTML = `${L(s[1], s[2])} <span aria-hidden="true">↓</span>`;
+      content.append(a);
+    }
+  }
+  function showPanel(name, animate = true) {
     const place = places[name], hasPanel = Boolean(place.index);
     panel.hidden = !hasPanel; stage.classList.toggle('scene-panel-open', hasPanel);
     home.disabled = name === 'home';
     if (!hasPanel) return;
-    panel.querySelector('.panel-index').textContent = place.index;
-    title.textContent = place.title;
+    panel.querySelector('.panel-index').textContent = L(`cockpit.panel.${name}.index`, place.index);
+    title.textContent = L(`cockpit.panel.${name}.title`, place.title);
     if (name === 'work') projectPreview();
-    else if (name === 'services') content.innerHTML = '<p>From an unclear idea to a useful digital solution. Strategy, design, and development, working together.</p><ul class="panel-service-list"><li>01 &nbsp; Website design & development</li><li>02 &nbsp; Custom web applications</li><li>03 &nbsp; UI / UX & digital strategy</li></ul><a class="panel-enquiry">Discuss your project <span aria-hidden="true">↗</span></a>';
-    else if (name === 'about') content.innerHTML = '<p>Luffor is a digital agency helping businesses find a clear direction through complex challenges.</p><ul class="panel-service-list"><li>01 &nbsp; At the helm: development</li><li>02 &nbsp; At the chart table: strategy & planning</li><li>03 &nbsp; On lookout: design & UI / UX</li></ul><a class="panel-enquiry">Start a conversation <span aria-hidden="true">↗</span></a>';
-    else if (name === 'contact') content.innerHTML = '<p>Tell us what you’re trying to solve. We’ll start with the right questions.</p><a class="panel-enquiry"><span class="panel-email"></span><span aria-hidden="true">↗</span></a><p class="radio-signoff">YOUR NEXT CHAPTER STARTS WITH A CONVERSATION.</p>';
-    const link = content.querySelector('a.panel-enquiry');
-    if (link) link.href = 'mailto:' + email;
-    const mail = content.querySelector('.panel-email');
-    if (mail) mail.textContent = email;
+    else {
+      if (name === 'services') content.innerHTML = `<p>${L('cockpit.services.copy', 'From an unclear idea to a useful digital solution. Strategy, design, and development, working together.')}</p><ul class="panel-service-list"><li>01 &nbsp; ${L('cockpit.services.1', 'Website design &amp; development')}</li><li>02 &nbsp; ${L('cockpit.services.2', 'Custom web applications')}</li><li>03 &nbsp; ${L('cockpit.services.3', 'UI / UX &amp; digital strategy')}</li></ul>${enquiry('general', 'cockpit.discuss', 'Discuss your project')}`;
+      else if (name === 'about') content.innerHTML = `<p>${L('cockpit.about.copy', 'Luffor is a digital agency helping businesses find a clear direction through complex challenges.')}</p><ul class="panel-service-list"><li>01 &nbsp; ${L('cockpit.about.1', 'At the helm: development')}</li><li>02 &nbsp; ${L('cockpit.about.2', 'At the chart table: strategy &amp; planning')}</li><li>03 &nbsp; ${L('cockpit.about.3', 'On lookout: design &amp; UI / UX')}</li></ul>${enquiry('general', 'cockpit.start', 'Start a conversation')}`;
+      else if (name === 'contact') content.innerHTML = `<p>${L('cockpit.contact.copy', 'Tell us what you’re trying to solve. We’ll start with the right questions.')}</p><a class="panel-enquiry" data-panel-contact="general"><span class="panel-email"></span> <span aria-hidden="true">↗</span></a><p class="radio-signoff">${L('cockpit.contact.signoff', 'YOUR NEXT CHAPTER STARTS WITH A CONVERSATION.')}</p>`;
+      finishPanel(name);
+    }
     panel.scrollTop = 0;
-    if (movementAllowed()) panel.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
+    if (animate && movementAllowed()) panel.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 200, easing: 'ease-out' });
   }
+  addEventListener('luffor:langchange', () => { showPanel(active, false); status.textContent = L('cockpit.label.' + active, places[active].label); });
   function navigate(name, instant = false) {
     if (!places[name]) return;
     if (!introSkipped) finishIntro();
@@ -95,8 +115,7 @@
     stage.dataset.destination = name;
     showPanel(name);
     engine?.go(name, instant || !movementAllowed());
-    announcement.textContent = places[name].label;
-    status.textContent = places[name].label;
+    announcement.textContent = status.textContent = L('cockpit.label.' + name, places[name].label);
   }
   buttons.forEach(b => b.addEventListener('click', () => {
     navigate(b.dataset.cockpitGo);

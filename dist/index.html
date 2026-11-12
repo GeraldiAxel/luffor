@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#02204F">
-  <meta name="description" content="Luffor is a digital agency helping businesses find a clear direction through complex challenges. Digital strategy, purposeful design, websites, and applications.">
+  <meta name="description" content="Luffor builds websites for Indonesian businesses: landing pages, company websites, online stores and custom web applications, with clear fixed prices.">
   <meta property="og:title" content="Luffor — Website & Application Development Agency">
   <meta property="og:description" content="From an unclear idea to a useful digital solution. Strategy, design, and development, working together.">
   <meta property="og:type" content="website">
@@ -18,13 +18,16 @@
   <link rel="stylesheet" href="technology.css?v=minimal-1">
   <link rel="stylesheet" href="assets/vendor/lenis.css">
   <link rel="stylesheet" href="cockpit.css?v=studio-2">
+  <link rel="stylesheet" href="sections.css?v=4">
   <link rel="preload" as="image" href="assets/cockpit-studio/poster.webp">
   <title>Luffor — Website & Application Development Agency</title>
   <script src="site-data.js" defer></script>
+  <script src="i18n.js?v=2" defer></script>
   <script src="app.js?v=minimal-1" defer></script>
   <script src="motion.js?v=minimal-1" defer></script>
   <script src="ink.js?v=1" defer></script>
-  <script src="cockpit-studio.js?v=3" defer></script>
+  <script src="sections.js?v=2" defer></script>
+  <script src="cockpit-studio.js?v=4" defer></script>
   <script src="assets/vendor/lenis.min.js" defer></script>
   <script src="smooth-scroll.js?v=1" defer></script>
 </head>
@@ -33,9 +36,19 @@
   <div class="reading-progress" aria-hidden="true"><span></span></div>
   <header class="site-header wrap" id="top">
     <a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a>
-    <span class="header-note">Digital design &amp; development</span>
+    <span class="header-note" data-i18n="header.note">Digital design &amp; development</span>
     <nav class="main-nav" id="main-nav" aria-label="Main navigation">
-      <button type="button" data-cockpit-go="work">Work</button><button type="button" data-cockpit-go="services">Services</button><button type="button" data-cockpit-go="about">About</button><a class="nav-link" href="#contact">Let’s talk <span class="small-arrow" aria-hidden="true">↗</span></a>
+      <details class="nav-menu" open>
+        <summary data-i18n="nav.menu">Menu</summary>
+        <div class="nav-sections">
+          <a class="nav-link" href="#pricing" data-i18n="nav.pricing">Pricing</a>
+          <a class="nav-link" href="#process" data-i18n="nav.process">Process</a>
+          <a class="nav-link" href="#work" data-i18n="nav.work">Work</a>
+          <a class="nav-link" href="#faq" data-i18n="nav.faq">FAQ</a>
+        </div>
+      </details>
+      <button class="lang-toggle" type="button" data-lang-toggle aria-label="Ganti bahasa ke Bahasa Indonesia"><span data-lang-opt="en" class="is-active">EN</span> / <span data-lang-opt="id">ID</span></button>
+      <a class="nav-link nav-cta" href="#contact"><span data-i18n="nav.talk">Let’s talk</span> <span class="small-arrow" aria-hidden="true">↗</span></a>
     </nav>
   </header>
   <main id="main">
@@ -55,45 +68,202 @@
           <button class="scene-hotspot is-waypoint" data-cockpit-go="home" aria-label="Return to the opening view of the bridge" hidden><span class="hotspot-ring" aria-hidden="true">↶</span><span class="hotspot-name">Back to the bridge</span></button>
         </div>
         <aside class="scene-panel" aria-labelledby="scene-panel-title" hidden><button class="scene-panel-close" type="button" aria-label="Close panel and return to the bridge">×</button><span class="panel-index"></span><h2 id="scene-panel-title"></h2><div class="panel-content"></div></aside>
-        <p class="scene-status">Drag to look around. Click to explore.</p>
+        <p class="scene-status" data-i18n="cockpit.status">Drag to look around. Click to explore.</p>
         <div class="scene-look" aria-label="Look around the cockpit"><button type="button" data-look="-1" aria-label="Look left">←</button><span>LOOK AROUND</span><button type="button" data-look="1" aria-label="Look right">→</button></div>
         
       </div>
 
       <nav class="scene-nav" aria-label="Cockpit destinations">
-        <span class="scene-nav-label">EXPLORE THE COCKPIT</span>
+        <span class="scene-nav-label" data-i18n="cockpit.explore">EXPLORE THE COCKPIT</span>
         <div class="scene-destinations">
-          <button type="button" data-cockpit-go="home" aria-pressed="true"><span>01</span> Bridge</button>
-          <button type="button" data-cockpit-go="work" aria-pressed="false"><span>02</span> Work</button>
-          <button type="button" data-cockpit-go="services" aria-pressed="false"><span>03</span> Services</button>
-          <button type="button" data-cockpit-go="about" aria-pressed="false"><span>04</span> About</button>
-          <button type="button" data-cockpit-go="contact" aria-pressed="false"><span>05</span> Contact</button>
-          <button type="button" data-cockpit-go="helm" aria-pressed="false"><span>06</span> Helm</button>
-          <button type="button" data-cockpit-go="reverse" aria-pressed="false"><span>07</span> Look aft</button>
+          <button type="button" data-cockpit-go="home" aria-pressed="true"><span>01</span> <span data-i18n="dest.home">Bridge</span></button>
+          <button type="button" data-cockpit-go="work" aria-pressed="false"><span>02</span> <span data-i18n="dest.work">Work</span></button>
+          <button type="button" data-cockpit-go="services" aria-pressed="false"><span>03</span> <span data-i18n="dest.services">Services</span></button>
+          <button type="button" data-cockpit-go="about" aria-pressed="false"><span>04</span> <span data-i18n="dest.about">About</span></button>
+          <button type="button" data-cockpit-go="contact" aria-pressed="false"><span>05</span> <span data-i18n="dest.contact">Contact</span></button>
+          <button type="button" data-cockpit-go="helm" aria-pressed="false"><span>06</span> <span data-i18n="dest.helm">Helm</span></button>
+          <button type="button" data-cockpit-go="reverse" aria-pressed="false"><span>07</span> <span data-i18n="dest.reverse">Look aft</span></button>
         </div>
-        <button class="scene-return" type="button" data-cockpit-go="home" disabled>↶ Back to bridge</button>
+        <button class="scene-return" type="button" data-cockpit-go="home" disabled data-i18n="cockpit.back">↶ Back to bridge</button>
       </nav>
       <p class="sr-only" id="cockpit-announcement" role="status" aria-live="polite"></p>
       <div class="cockpit-intro">
-        <div><h1 id="hero-title">Websites &amp; apps.<br>Built to solve.</h1></div>
-        <div class="cockpit-intro-copy"><p>We design and develop websites and custom applications that move your business forward. A clear direction, from your first idea to the final build.</p><div class="hero-actions"><a class="quiet-link cockpit-enquiry" href="mailto:lufforsolution@gmail.com">Start a conversation <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#contact">Meet Luffor <span aria-hidden="true">↓</span></a></div></div>
+        <div><h1 id="hero-title" data-i18n="hero.title">Websites &amp; apps.<br>Built to solve.</h1></div>
+        <div class="cockpit-intro-copy"><p data-i18n="hero.copy">We design and develop websites and custom applications that move your business forward. A clear direction, from your first idea to the final build.</p><div class="hero-actions"><a class="quiet-link cockpit-enquiry" href="mailto:lufforsolution@gmail.com" data-wa-link data-wa-context="general"><span data-i18n="hero.cta">Start a conversation</span> <span aria-hidden="true">↗</span></a><a class="quiet-link" href="#pricing"><span data-i18n="hero.packages">See packages</span> <span aria-hidden="true">↓</span></a></div></div>
       </div>
       <noscript><p class="wrap">We create websites, custom applications, and thoughtful interfaces. <a href="mailto:lufforsolution@gmail.com">Discuss your project with Luffor ↗</a></p></noscript>
-    </section>  <footer class="contact-section" id="contact" aria-labelledby="contact-title">
+    </section>
+
+    <!-- ======================================================= pricing -->
+    <section class="ls-section ls-light" id="pricing" aria-labelledby="pricing-title">
+      <div class="wrap">
+        <header class="ls-head reveal">
+          <p class="ls-eyebrow mono"><span>01</span> <span data-i18n="pricing.eyebrow">Packages</span></p>
+          <h2 id="pricing-title" data-i18n="pricing.title">Clear prices, <em>before</em> we start.</h2>
+          <p class="ls-lead" data-i18n="pricing.lead">Every package is a fixed price agreed upfront. Need something in between? We’ll quote it.</p>
+        </header>
+        <aside class="ls-offer reveal" data-launch-offer hidden aria-labelledby="offer-title">
+          <span class="ls-beam" aria-hidden="true"></span>
+          <p class="mono ls-offer-tag"><span data-i18n="offer.tag">Launch offer</span></p>
+          <p class="ls-offer-text" id="offer-title" data-offer-text></p>
+          <a class="ls-button" data-wa-link data-wa-context="offer" href="#contact"><span data-wa-label>Claim the offer</span> <span aria-hidden="true">↗</span></a>
+        </aside>
+        <div class="ls-packages">
+          <article class="ls-package ls-spot reveal" data-package="landing">
+            <p class="mono ls-tier" data-i18n="pkg.landing.tier">Starter</p>
+            <h3 data-i18n="pkg.landing.name">Landing page</h3>
+            <p class="ls-price"><span class="ls-price-from" data-i18n="price.from">From</span> <span data-price="landing">[Price]</span></p>
+            <ul role="list">
+              <li data-i18n="pkg.landing.i1">One-page responsive design</li>
+              <li data-i18n="pkg.landing.i2">Up to 6 content sections</li>
+              <li data-i18n="pkg.landing.i3">WhatsApp button and contact form</li>
+              <li data-i18n="pkg.landing.i4">Basic SEO and Google Analytics setup</li>
+              <li data-i18n="pkg.landing.i5">Domain and hosting setup</li>
+              <li data-i18n="pkg.landing.i6">2 rounds of revisions</li>
+            </ul>
+            <a class="ls-button" data-wa-link data-wa-context="landing" href="#contact"><span data-wa-label>Ask about this package</span> <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="ls-package ls-spot is-featured reveal" data-package="company">
+            <span class="ls-beam" aria-hidden="true"></span>
+            <p class="mono ls-tier"><span data-i18n="pkg.company.tier">Business</span> <span class="ls-badge" data-i18n="pkg.recommended">Recommended</span></p>
+            <h3 data-i18n="pkg.company.name">Company website</h3>
+            <p class="ls-price"><span class="ls-price-from" data-i18n="price.from">From</span> <span data-price="company">[Price]</span></p>
+            <ul role="list">
+              <li data-i18n="pkg.company.i1">Up to 8 pages</li>
+              <li data-i18n="pkg.company.i2">English and Bahasa Indonesia versions</li>
+              <li data-i18n="pkg.company.i3">Blog or news section you can update</li>
+              <li data-i18n="pkg.company.i4">WhatsApp, map and contact form</li>
+              <li data-i18n="pkg.company.i5">Google Business Profile and Search Console setup</li>
+              <li data-i18n="pkg.company.i6">3 rounds of revisions</li>
+            </ul>
+            <a class="ls-button" data-wa-link data-wa-context="company" href="#contact"><span data-wa-label>Ask about this package</span> <span aria-hidden="true">↗</span></a>
+          </article>
+          <article class="ls-package ls-spot reveal" data-package="store">
+            <p class="mono ls-tier" data-i18n="pkg.store.tier">Commerce</p>
+            <h3 data-i18n="pkg.store.name">Online store</h3>
+            <p class="ls-price"><span class="ls-price-from" data-i18n="price.from">From</span> <span data-price="store">[Price]</span></p>
+            <ul role="list">
+              <li data-i18n="pkg.store.i1">Product catalogue with categories</li>
+              <li data-i18n="pkg.store.i2">Checkout by WhatsApp or Midtrans / Xendit payments</li>
+              <li data-i18n="pkg.store.i3">Order notifications</li>
+              <li data-i18n="pkg.store.i4">Admin to manage products and stock</li>
+              <li data-i18n="pkg.store.i5">Shipping options setup</li>
+              <li data-i18n="pkg.store.i6">Training session for your team</li>
+            </ul>
+            <a class="ls-button" data-wa-link data-wa-context="store" href="#contact"><span data-wa-label>Ask about this package</span> <span aria-hidden="true">↗</span></a>
+          </article>
+        </div>
+        <div class="ls-custom ls-spot reveal">
+          <div>
+            <p class="mono ls-tier" data-i18n="pkg.custom.tier">Custom</p>
+            <h3 data-i18n="pkg.custom.name">Custom web application</h3>
+            <p data-i18n="pkg.custom.copy">Tell us how your business runs. We’ll send a scoped proposal with a fixed price and timeline.</p>
+          </div>
+          <a class="ls-button" data-wa-link data-wa-context="custom" href="#contact"><span data-wa-label>Request a quote</span> <span aria-hidden="true">↗</span></a>
+        </div>
+        <p class="ls-note mono" data-i18n="pricing.note">Prices in Indonesian rupiah, excluding third-party costs such as domain, hosting and payment fees.</p>
+      </div>
+    </section>
+
+    <!-- ======================================================= process -->
+    <section class="ls-section ls-glow is-left" id="process" aria-labelledby="process-title">
+      <div class="wrap">
+        <header class="ls-head reveal">
+          <p class="ls-eyebrow mono"><span>02</span> <span data-i18n="process.eyebrow">Process</span></p>
+          <h2 id="process-title" data-i18n="process.title">How a project <em>runs</em>.</h2>
+          <p class="ls-lead" data-i18n="process.lead">Five steps, one point of contact, and you always know what happens next.</p>
+        </header>
+        <ol class="ls-steps" role="list" data-steps>
+          <li class="reveal"><span class="ls-step-num" aria-hidden="true">01</span><div><h3 data-i18n="step.1.name">Free consultation</h3><p data-i18n="step.1.copy">A short call or WhatsApp chat about your business, your goals and your budget.</p></div></li>
+          <li class="reveal"><span class="ls-step-num" aria-hidden="true">02</span><div><h3 data-i18n="step.2.name">Proposal</h3><p data-i18n="step.2.copy">A fixed-price proposal with scope and timeline. Work starts after a 50% deposit.</p></div></li>
+          <li class="reveal"><span class="ls-step-num" aria-hidden="true">03</span><div><h3 data-i18n="step.3.name">Design</h3><p data-i18n="step.3.copy">We design the key pages first and refine them with you before anything is built.</p></div></li>
+          <li class="reveal"><span class="ls-step-num" aria-hidden="true">04</span><div><h3 data-i18n="step.4.name">Build &amp; launch</h3><p data-i18n="step.4.copy">We build, test on phones and desktops, connect your domain and go live. The remaining 50% is due at launch.</p></div></li>
+          <li class="reveal"><span class="ls-step-num" aria-hidden="true">05</span><div><h3 data-i18n="step.5.name">Support</h3><p data-i18n="step.5.copy">30 days of free fixes after launch, then optional monthly care.</p></div></li>
+        </ol>
+        <div class="ls-included reveal">
+          <h3 data-i18n="included.title">Included in every build</h3>
+          <ul role="list">
+            <li data-i18n="included.1">Mobile-first design</li>
+            <li data-i18n="included.2">Fast loading on Indonesian networks</li>
+            <li data-i18n="included.3">Secure HTTPS</li>
+            <li data-i18n="included.4">WhatsApp integration</li>
+            <li data-i18n="included.5">Basic SEO setup</li>
+            <li data-i18n="included.6">You own the domain, content and code</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================= concept work -->
+    <section class="ls-section" id="work" aria-labelledby="work-title">
+      <div class="wrap">
+        <header class="ls-head reveal">
+          <p class="ls-eyebrow mono"><span>03</span> <span data-i18n="work.eyebrow">Concept work</span></p>
+          <h2 id="work-title" data-i18n="work.title">How we think about <em>interfaces</em>.</h2>
+          <p class="ls-lead" data-i18n="work.lead">These are independent concepts made to show our approach, not client projects. Your business could be our first case study here.</p>
+        </header>
+        <ul class="ls-concepts" role="list">
+          <li class="reveal"><figure><div class="ls-frame"><img src="assets/project-forme.svg" width="1600" height="1000" alt="Forme company website interface concept" loading="lazy"></div><figcaption><span class="mono" data-i18n="concept.1.kind">Company website</span><strong>Forme</strong><span data-i18n="concept.1.copy">A service-led website with a clearer path from first visit to enquiry.</span></figcaption></figure></li>
+          <li class="reveal"><figure><div class="ls-frame"><img src="assets/project-quiet-edit.svg" width="1600" height="1000" alt="The Quiet Edit publishing website interface concept" loading="lazy"></div><figcaption><span class="mono" data-i18n="concept.2.kind">Publishing website</span><strong>The Quiet Edit</strong><span data-i18n="concept.2.copy">An editorial interface that gives articles and featured stories room to breathe.</span></figcaption></figure></li>
+          <li class="reveal"><figure><div class="ls-frame"><img src="assets/project-common-ground.svg" width="1600" height="1000" alt="Common Ground custom application interface concept" loading="lazy"></div><figcaption><span class="mono" data-i18n="concept.3.kind">Custom application</span><strong>Common Ground</strong><span data-i18n="concept.3.copy">A shared workspace for people, projects and everyday tasks.</span></figcaption></figure></li>
+          <li class="reveal"><figure><div class="ls-frame"><img src="assets/project-perspective.svg" width="1600" height="1000" alt="Perspective dashboard interface concept" loading="lazy"></div><figcaption><span class="mono" data-i18n="concept.4.kind">Dashboard &amp; UI / UX</span><strong>Perspective</strong><span data-i18n="concept.4.copy">A reporting interface that turns complex information into a useful overview.</span></figcaption></figure></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================= industries -->
+    <section class="ls-section ls-glow" id="industries" aria-labelledby="industries-title">
+      <div class="wrap">
+        <header class="ls-head reveal">
+          <p class="ls-eyebrow mono"><span>04</span> <span data-i18n="ind.eyebrow">Who it’s for</span></p>
+          <h2 id="industries-title" data-i18n="ind.title">Built for businesses <em>like yours</em>.</h2>
+        </header>
+        <ul class="ls-wall" role="list">
+          <li class="reveal" tabindex="0"><span class="ls-wall-name" data-i18n="ind.1.name">Local shops &amp; UMKM</span><span class="ls-wall-copy" data-i18n="ind.1.copy">Catalogue, location and ordering by WhatsApp.</span></li>
+          <li class="reveal" tabindex="0"><span class="ls-wall-name" data-i18n="ind.2.name">Restaurants &amp; cafés</span><span class="ls-wall-copy" data-i18n="ind.2.copy">Menu, reservations and delivery links.</span></li>
+          <li class="reveal" tabindex="0"><span class="ls-wall-name" data-i18n="ind.3.name">Clinics &amp; health</span><span class="ls-wall-copy" data-i18n="ind.3.copy">Services, practitioner schedules and appointment requests.</span></li>
+          <li class="reveal" tabindex="0"><span class="ls-wall-name" data-i18n="ind.4.name">Property</span><span class="ls-wall-copy" data-i18n="ind.4.copy">Listings with photos, filters and enquiry forms.</span></li>
+          <li class="reveal" tabindex="0"><span class="ls-wall-name" data-i18n="ind.5.name">Education &amp; courses</span><span class="ls-wall-copy" data-i18n="ind.5.copy">Programmes, registration and online payment.</span></li>
+          <li class="reveal" tabindex="0"><span class="ls-wall-name" data-i18n="ind.6.name">Professional services</span><span class="ls-wall-copy" data-i18n="ind.6.copy">Credible sites for consultants, law and accounting firms.</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ======================================================= FAQ -->
+    <section class="ls-section" id="faq" aria-labelledby="faq-title">
+      <div class="wrap ls-faq-wrap">
+        <header class="ls-head reveal">
+          <p class="ls-eyebrow mono"><span>05</span> <span data-i18n="faq.eyebrow">FAQ</span></p>
+          <h2 id="faq-title" data-i18n="faq.title">Questions we <em>hear often</em>.</h2>
+        </header>
+        <div class="ls-faq reveal">
+          <details><summary data-i18n="faq.1.q">How much does a website cost?</summary><p data-i18n="faq.1.a">See the packages above. Every price is fixed and agreed before we start, so there are no surprise costs.</p></details>
+          <details><summary data-i18n="faq.2.q">How long does it take?</summary><p data-i18n="faq.2.a">About a week for a landing page, two to three weeks for a company website and three to four weeks for an online store, once we have your content.</p></details>
+          <details><summary data-i18n="faq.3.q">Do I need to prepare the content?</summary><p data-i18n="faq.3.a">Send us what you have: logo, photos and product details. We help structure and write the rest in English or Bahasa Indonesia.</p></details>
+          <details><summary data-i18n="faq.4.q">Who owns the website?</summary><p data-i18n="faq.4.a">You do. The domain is registered in your name and you receive the full source code at handover.</p></details>
+          <details><summary data-i18n="faq.5.q">Can I update the website myself?</summary><p data-i18n="faq.5.a">Yes. We set up a simple way to edit text and images, and give you a short guide.</p></details>
+          <details><summary data-i18n="faq.6.q">How does payment work?</summary><p data-i18n="faq.6.a">A 50% deposit to start and 50% at launch, with an invoice for every payment.</p></details>
+          <details><summary data-i18n="faq.7.q">What happens after launch?</summary><p data-i18n="faq.7.a">30 days of free fixes are included. After that you can choose a monthly care plan or ask for help when you need it.</p></details>
+          <details><summary data-i18n="faq.8.q">Do you work with businesses across Indonesia?</summary><p data-i18n="faq.8.a">Yes. We work remotely with clients anywhere in Indonesia, by WhatsApp, video call and email.</p></details>
+        </div>
+      </div>
+    </section>
+
+    <footer class="contact-section" id="contact" aria-labelledby="contact-title">
       <div class="wrap contact-top">
-        <div class="contact-eyebrow reveal"><p class="eyebrow">The next chapter</p><a class="back-top mono" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div>
-        <div class="contact-invitation reveal"><h2 id="contact-title">Let’s build your<br><em>next digital solution.</em></h2><a class="contact-arrow" href="mailto:lufforsolution@gmail.com" aria-label="Email Luffor about a project"><span aria-hidden="true">↗</span></a></div>
-        <div class="contact-line reveal"><p>Tell us what you’re trying to solve.<br>We’ll start with the right questions.</p><a class="email-link" href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a></div>
+        <div class="contact-eyebrow reveal"><p class="eyebrow" data-i18n="contact.eyebrow">The next chapter</p><a class="back-top mono" href="#top">BACK TO TOP <span aria-hidden="true">↑</span></a></div>
+        <div class="contact-invitation reveal"><h2 id="contact-title" data-i18n="contact.title">Let’s build your<br><em>next digital solution.</em></h2><a class="contact-arrow" href="mailto:lufforsolution@gmail.com" aria-label="Email Luffor about a project"><span aria-hidden="true">↗</span></a></div>
+        <div class="contact-line reveal"><p data-i18n="contact.line">Tell us what you’re trying to solve.<br>We’ll start with the right questions.</p><a class="email-link" href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a><a class="ls-button contact-whatsapp" data-wa-link data-wa-context="general" href="#contact"><span data-wa-label>Chat on WhatsApp</span> <span aria-hidden="true">↗</span></a></div>
       </div>
       <div class="footer-bottom">
         <div class="wrap footer-grid">
-          <div class="footer-brand"><a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a><p>A clear point of view.<br>A lasting impression.</p><p class="copyright mono">© <span data-current-year>2026</span> <span data-brand-plain>Luffor</span></p></div>
-          <div class="footer-column"><p class="mono footer-label">EXPLORE</p><a href="#hero">Back to the hero</a><a href="#contact">Let’s talk</a></div>
-          <div class="footer-column"><p class="mono footer-label">ELSEWHERE</p><a href="#social-instagram" data-social="instagram">Instagram <span aria-hidden="true">↗</span></a><a href="#social-behance" data-social="behance">Behance <span aria-hidden="true">↗</span></a><a href="#social-linkedin" data-social="linkedin">LinkedIn <span aria-hidden="true">↗</span></a></div>
-          <div class="footer-column"><p class="mono footer-label">SAY HELLO</p><a href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a><p class="footer-location">Websites &amp; applications<br>Strategy. Design. Development.</p></div>
+          <div class="footer-brand"><a class="wordmark" href="#top" aria-label="Luffor, home"><img class="brand-logo" alt="" hidden><span data-brand>Luffor<span class="wordmark-period">.</span></span></a><p data-i18n="footer.tagline">A clear point of view.<br>A lasting impression.</p><p class="copyright mono">© <span data-current-year>2026</span> <span data-brand-plain>Luffor</span></p></div>
+          <div class="footer-column"><p class="mono footer-label" data-i18n="footer.explore">EXPLORE</p><a href="#pricing" data-i18n="nav.pricing">Pricing</a><a href="#process" data-i18n="nav.process">Process</a><a href="#faq" data-i18n="nav.faq">FAQ</a><a href="#hero" data-i18n="footer.toHero">Back to the hero</a></div>
+          <div class="footer-column"><p class="mono footer-label" data-i18n="footer.elsewhere">ELSEWHERE</p><a href="#social-instagram" data-social="instagram">Instagram <span aria-hidden="true">↗</span></a><a href="#social-behance" data-social="behance">Behance <span aria-hidden="true">↗</span></a><a href="#social-linkedin" data-social="linkedin">LinkedIn <span aria-hidden="true">↗</span></a></div>
+          <div class="footer-column"><p class="mono footer-label" data-i18n="footer.hello">SAY HELLO</p><a href="mailto:lufforsolution@gmail.com" data-email>lufforsolution@gmail.com <span aria-hidden="true">↗</span></a><p class="footer-location">Websites &amp; applications<br>Strategy. Design. Development.</p></div>
         </div>
         <div class="footer-art" id="tide" aria-hidden="true"><img src="assets/ocean-sail-dolphins.webp" width="2172" height="724" alt="" loading="lazy"></div>
-        <div class="footer-colophon wrap mono"><span>GUIDED BY CURIOSITY. GROUNDED IN CRAFT.</span><div class="footer-motion-controls"><button class="draw-replay mono" type="button" aria-label="Replay ocean drawing" hidden>REPLAY THE TIDE <span aria-hidden="true">↻</span></button><button class="motion-toggle mono" type="button" aria-label="Turn off animations" aria-pressed="true" hidden><span class="motion-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="motion-toggle-label">MOTION ON</span></button></div><span>DESIGNED WITH INTENTION.</span></div>
+        <div class="footer-colophon wrap mono"><span data-i18n="footer.colophonA">GUIDED BY CURIOSITY. GROUNDED IN CRAFT.</span><div class="footer-motion-controls"><button class="draw-replay mono" type="button" aria-label="Replay ocean drawing" hidden>REPLAY THE TIDE <span aria-hidden="true">↻</span></button><button class="motion-toggle mono" type="button" aria-label="Turn off animations" aria-pressed="true" hidden><span class="motion-symbol" aria-hidden="true"><i></i><i></i><i></i><i></i></span><span class="motion-toggle-label">MOTION ON</span></button></div><span data-i18n="footer.colophonB">DESIGNED WITH INTENTION.</span></div>
       </div>
     </footer>
   </main>

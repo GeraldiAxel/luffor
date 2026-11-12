@@ -34,7 +34,7 @@
   };
   const route = () => {
     const hash = location.hash;
-    if (/^#(?:capabilities|work|about|project-.*)$/.test(hash)) history.replaceState(null, '', location.pathname + location.search + '#top');
+    if (/^#(?:capabilities|about|project-.*)$/.test(hash)) history.replaceState(null, '', location.pathname + location.search + '#top');
     const platform = hash.slice(8);
     if (!hash.startsWith('#social-') || !['instagram', 'behance', 'linkedin'].includes(platform)) {
       if (dialog.open) closeContact();

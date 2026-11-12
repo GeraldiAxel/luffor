@@ -81,6 +81,25 @@ if (html.includes('cockpit-studio.js')) {
   }
   console.log(`Cockpit studio: ${(model.length/1024/1024).toFixed(2)} MiB, ${gltf.meshes.length} meshes, ${manifest.cameras.length} cameras, ${manifest.destinations.length} destinations, ${gltf.skins.length} developers.`);
 }
+// English / Indonesian: every translatable element needs an Indonesian entry in i18n.js.
+if (html.includes('i18n.js')) {
+  const dictionary = await readFile(path.join(root,'i18n.js'),'utf8');
+  const translated = new Set([...dictionary.matchAll(/'([a-zA-Z0-9.]+)':\s*'/g)].map(m=>m[1]));
+  const keys = [...new Set([...html.matchAll(/data-i18n="([^"]+)"/g)].map(m=>m[1]))];
+  const missing = keys.filter(k=>!translated.has(k));
+  if (missing.length) throw new Error(`Missing Indonesian text for: ${missing.join(', ')}`);
+  console.log(`Languages: ${keys.length} page texts translated into Bahasa Indonesia.`);
+}
+// Business details that still need real values (warnings, not failures).
+{
+  const site = {};
+  vm.runInNewContext(await readFile(path.join(root,'site-data.js'),'utf8'),{window:site});
+  const p = site.PORTFOLIO, todo = [];
+  for (const [name,value] of Object.entries(p.packages||{})) if (!(typeof value==='number'&&value>0)) todo.push(`price for ${name}`);
+  if (!String(p.contact?.whatsapp||'').replace(/\D/g,'')) todo.push('WhatsApp number (buttons fall back to email)');
+  if (typeof p.launchOffer?.discountPercent!=='number') todo.push('launch offer discount (banner hidden)');
+  if (todo.length) console.warn(`To fill in site-data.js: ${todo.join('; ')}.`);
+}
 const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
 for (const match of html.matchAll(/href="#([^"]+)"/g)) {
   if (!ids.has(match[1]) && !match[1].startsWith('social-')) throw new Error(`Missing link target: ${match[1]}`);
